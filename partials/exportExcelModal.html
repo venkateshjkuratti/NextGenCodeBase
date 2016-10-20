@@ -1,0 +1,15 @@
+<div modal-element="exportExcel" id="exportExcelModal">
+    <div class="modal-header main-labels-static mdl-shadow--2dp">
+        <div class="list-icon left"><img ng-src="assets/images/email-doc-popup.png" aria-hidden="true" src="assets/images/excel.png"></div>
+        <h5 class="modal-title left">{{'EXPORT TO EXCEL' | translate}}</h5>
+        <div class="close" ng-click="cancel()"><i class="fa fa-close" aria-hidden="true"></i></div>
+    </div>
+    <div class="modal-body">                  
+        <div class="loader" ng-show="isDownloading">
+            <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
+        </div>
+        <div class="statusUpdate mb15">{{'Data is getting downloaded...' | translate}}</div>
+        <button ng-click="cancelRequest()">{{'Cancel' | translate}}</button>
+    </div>
+
+</div>

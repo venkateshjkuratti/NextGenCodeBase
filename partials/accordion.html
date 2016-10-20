@@ -1,0 +1,12 @@
+<div class="create-document-lists accordion">
+    <div class="list" ng-repeat="i in accordionList">
+        <div class="list-heading" ng-click="selectList($index)">
+            <div class="list-icon left"><img ng-src="{{i.iconImg}}" aria-hidden="true"></i></div>
+            <h4 class="list-heading-content left">{{i.heading | translate}}</h4>
+            <div class="right arrows"><i class="fa" ng-class="{true:'fa-angle-up', false:'fa-angle-down'}[isSet($index)==true]" aria-hidden="true"></i></div>
+        </div>
+        <div class="list-desp" ng-class="{active:isSet($index)}" ng-include src="i.templatePath">
+
+        </div>
+    </div>
+</div>

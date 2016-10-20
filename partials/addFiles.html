@@ -1,0 +1,21 @@
+<div class="add-files" modal-element="add">
+    <form name="uploadForm" novalidate>
+        <div class="modal-header main-labels-static mdl-shadow--2dp">
+            <h5 class="modal-title left">{{'Add Pages' | translate}}</h5>
+            <div class="close right" ng-click="cancel()"><i class="fa fa-times" aria-hidden="true"></i></div>
+        </div>
+        <div class="modal-body add-file">
+            <div class="loader" ng-show="isLoading()">
+                  <div class="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active"></div>
+            </div>
+            <div ng-show="!isLoading() && !isUploadSuccess()">
+                <input type="file" valid-file ng-model="inputFile" file-input="uploadDocument"  accept="application/pdf" ng-required=true />
+                <div class="alert alert-danger custom" role="alert">{{'*only pdf files are acceptable' | translate}}</div>
+            </div>
+            <div ng-show="isUploadSuccess()" class="alert alert-success">{{message() | translate}}</div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent upload" ng-click="uploadFile()" ng-disabled="uploadForm.$invalid" ng-show="!isUploadSuccess()">{{'Upload' | translate}}</button>
+        </div>
+    </form>
+</div>

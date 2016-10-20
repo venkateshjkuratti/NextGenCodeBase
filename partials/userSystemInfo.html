@@ -1,0 +1,21 @@
+<div modal-element="preferences" id="userPreferenceModal">
+    <div class="modal-header main-labels-static mdl-shadow--2dp">
+        <div class="list-icon left"><img ng-src="assets/images/user-pre-heading.png" aria-hidden="true" src="assets/images/user-pre-heading.png"></div>
+        <h5 class="modal-title left">{{'USER SYSTEM INFO' | translate}}</h5>
+    </div>
+    <div class="modal-body">
+        <div>
+            <h5>{{'SELECT YOUR SYSTEM' | translate}}</h5>
+            <select class="select" ng-model="userSystemInfoDetails" ng-options="i.SystemId as i.SystemName for i in systemData.ImagingSystems" ng-change="getSelectedSystem(userSystemInfoDetails)">
+                <option disabled value="">{{'Select a system' | translate}}</option>
+            </select>
+        </div>
+        <div ng-if="userSystemInfoDetails!=null">
+            <h5>{{'SELECT LANGUAGE' | translate}}</h5>
+            <select class="select" ng-model="userSystemLanguage" ng-options="i.value as i.lang for i in languageData" ng-change="getSelectedLanguage(userSystemLanguage)">
+                <option disabled value="">{{'Select a language' | translate}}</option>
+            </select>
+        </div>
+
+    </div>
+</div>

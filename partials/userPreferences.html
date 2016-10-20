@@ -1,0 +1,66 @@
+<div modal-element="preferences" id="userPreferenceModal">
+    <div class="modal-header">
+        <div class="list-icon left"><img ng-src="assets/images/user-pre-heading.png" aria-hidden="true" src="assets/images/user-pre-heading.png"></div>
+        <h5 class="modal-title left">{{'USER PREFERENCE' | translate}}</h5>
+        <div class="close" ng-click="cancel()"><i class="fa fa-close" aria-hidden="true"></i></div>
+    </div>
+    <div class="modal-body">
+        <h5>{{'SELECT YOUR PREFERENCE(S)' | translate}}</h5>
+
+
+        <div class="box">
+            <h6>{{'System' | translate}}</h6>
+            <div class="content">
+                <label class="wAuto">{{'Date Format Display(Select Language)' | translate}}</label>
+                <select class="select" ng-model="dateFormatText">
+                    <option ng-repeat="formatOption in searchFieldOptions" value="{{formatOption.Language}}">{{formatOption.DisplayValue | translate}}</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="box">
+            <h6>Workflow</h6>
+            <div class="content">
+                <div class="left full-width">
+                    <span class="w65">{{'User Display Option' | translate}}:</span>
+                    <span class="option"><input type="checkbox" name="gpid" id="gpid" ng-model="gpid" ng-click="gpid=true;fullname=false" ng-checked="gpid"><label for="gpid"></label>{{'GPID' | translate}}</span>
+                    <span class="option"><input type="checkbox" name="fullname" id="fullname" ng-model="fullname" ng-click="fullname=true;gpid=false" ng-checked="fullname"><label for="fullname"></label>Full Name</span>
+                </div>
+
+                <div class="left full-width">
+                    <span class="w65">{{'Routing Display Option' | translate}}:</span>
+                    <span class="option"><input type="checkbox" name="buttons" value="buttons" id="buttons" ng-model="buttons" ng-click="buttons=true;dropdown=false;" ng-checked="buttons"><label for="buttons"></label>{{'Buttons' | translate}}</span>
+                    <span class="option"><input type="checkbox" name="dropdown" value="dropdown" id="dropdown" ng-model="dropdown" ng-click="buttons=false;dropdown=true;" ng-checked="dropdown"><label for="dropdown"></label>{{'Drop Down' | translate}}</span>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="box">
+            <h6>{{'Web Upload' | translate}}</h6>
+            <div class="content">
+                <div class="left full-width">
+                    <span class="w65">{{'Send To Workflow' | translate}}:</span>
+                    <span class="option"><input type="checkbox" name="toWorkflow" value="toWorkflow" id="toWorkflow" ng-model="toWorkflow" ng-click="notToWorkflow=false;toWorkflow=true;" ng-checked="toWorkflow"><label for="toWorkflow" a-disabled="!isSendToWorkflowEnabled"></label>{{'Yes' | translate}}</span>
+                    <span class="option"><input type="checkbox" name="notToWorkflow" value="notToWorkflow" id="notToWorkflow" ng-model="notToWorkflow" ng-click="toWorkflow=false;notToWorkflow=true;" ng-checked="notToWorkflow"><label for="notToWorkflow" a-disabled="!isSendToWorkflowEnabled"></label>{{'No' | translate}}</span>
+                </div>
+
+                <div class="left full-width">
+                    <span class="w65">{{'Send Email notification' | translate}}:</span>
+                    <span class="option"><input type="checkbox" name="sendEmail" value="sendEmail" id="sendEmail" ng-model="sendEmail" ng-click="noSendEmail=false;sendEmail=true;" ng-checked="sendEmail"><label for="sendEmail" a-disabled="!isEmailNotifyEnabled"></label>{{'Yes' | translate}}</span>
+                    <span class="option"><input type="checkbox" name="noSendEmail" value="noSendEmail" id="noSendEmail" ng-model="noSendEmail" ng-click="sendEmail=false;noSendEmail=true;" ng-checked="noSendEmail"><label for="noSendEmail" a-disabled="!isEmailNotifyEnabled"></label>{{'No' | translate}}</span>
+                </div>
+
+            </div>
+        </div>
+        <div class="loader tac" ng-show="isUserPreferencesLoading">
+            <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
+        </div>
+        <div class="box saveUserPrefMsg"></div>
+        <div class="tac mb15">
+            <input type="button" ng-click="saveUserPref();" value="Update" />
+        </div>
+
+    </div>
+
+</div>

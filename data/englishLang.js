@@ -1,0 +1,1 @@
+var translations_en = { Welcome :'Welcome'}

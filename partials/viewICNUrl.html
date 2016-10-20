@@ -1,0 +1,17 @@
+<div modal-element="link">
+    <div class="modal-header main-labels-static mdl-shadow--2dp">
+        <h5 class="modal-title left">{{'Link' | translate}}</h5>
+        <div class="close right" ng-click="cancel()"><i class="fa fa-times" aria-hidden="true"></i></div>
+    </div>
+     <div class="modal-body">
+        <div class="loader" ng-show="isloading">
+            <div class="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active"></div>
+         </div>
+         <div class="content" ng-show="!isloading">
+            {{'URL' | translate}}:
+            <textarea copy-link copy-link-visible="isloading" name="link" ng-model="link" class="link-box"></textarea>
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent right" copy-to-clipboard="{{link}}" copy-to-clipboard-success="isCopySuccess()">COPY</button>
+        </div>
+    </div>
+    
+</div>

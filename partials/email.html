@@ -1,0 +1,24 @@
+<div modal-element="email" id="emailModal">
+    <div class="modal-header main-labels-static mdl-shadow--2dp">
+        <div class="list-icon left"><img ng-src="assets/images/email-doc-popup.png" aria-hidden="true" src="assets/images/email-doc-popup.png"></div>
+        <h5 class="modal-title left">{{'EMAIL DOCUMENT' | translate}}</h5>
+        <div class="close" ng-click="cancel()"><i class="fa fa-close" aria-hidden="true"></i></div>
+    </div>
+    <div class="loader" ng-show="isloading">
+        <div class="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active"></div>
+    </div>
+    <div class="modal-body" ng-show="!isloading">
+        <div id="toField" class="mb15" >
+            <label>{{'To' | translate}}</label>
+            <input type="text" id="emailId" ng-model="toField" ng-pattern="/^[_a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$/">
+        </div>
+        <div id="messageBody" class="mb15">
+            <label>{{'Message' | translate}}</label>
+            <textarea name="message" id="message" cols="100" rows="5" ng-model="message">
+            </textarea>
+        </div>
+        <div class="tac right btn orange spacer" ng-click="cancel()">{{'Cancel' | translate}}</div>
+        <div class="tac right btn violet spacer" ng-disabled="!(!!toField)" ng-click="sendEmail()">{{'Send' | translate}}</div>
+    </div>
+
+</div>

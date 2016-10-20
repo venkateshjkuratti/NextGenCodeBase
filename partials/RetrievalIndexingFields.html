@@ -1,0 +1,66 @@
+<div class="business-area-wrapper retrieval" ng-controller="retrievalIndexingFieldsController">
+    <div class="loader" ng-show="isloading || isLoading">
+        <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
+    </div>
+    <div class="noResults">{{'No results matching the search criteria was found. Please change the search criteria and re-try.' | translate}}</div>
+    <div class="retrievalResults">
+    <div class="head-wrapper">
+            <div class="right mr5">
+                <div class="search-field" ng-show="isTableVisible">
+                  <input ng-model="listItems" name="listItems" placeholder="Search or filter by any field">
+                  <i class="fa fa-search" aria-hidden="true"></i>
+                </div>
+            </div>
+    </div>
+    <div class="content-desp">
+            <div class="alert alert-danger" ng-show="error">{{'Data not available' | translate}}</div>
+            <div class="imgv-workitem-basket table-responsive clear" ng-show="isTableVisible">
+                <table class="table mdl-data-table mdl-js-data-table mdl-shadow--1dp" resizeable id="retrievalResults">
+                    <thead>
+                        <tr>
+                            <th>
+                                <div class="text left">{{'View Document' | translate}}</div>
+                                <div class="sort hide">
+                                    <i class="fa fa-sort-asc" aria-hidden="true" ng-class="{active:isSetOrder(key+'Asc')}"></i>
+                                    <i class="fa fa-sort-desc" aria-hidden="true" ng-class="{active:isSetOrder(key+'Desc')}"></i>
+                                </div>
+                            </th>
+                            <th ng-repeat="(key,value) in searchResultsHeaders">
+                                <div class="text left">{{key | translate}}</div>
+                                <div class="sort">
+                                    <i ng-click="sortItems(key,key+'Asc')" class="fa fa-sort-asc" aria-hidden="true" ng-class="{active:isSetOrder(key+'Asc')}"></i>
+                                    <i ng-click="sortItems('-'+key,key+'Desc')" class="fa fa-sort-desc" aria-hidden="true" ng-class="{active:isSetOrder(key+'Desc')}"></i>
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr class="rows dnd-moved" ng-repeat="item in searchResults | orderBy:sort |  filter:listItems | limitInstances:from:to"  ng-click="setInstances(item,item.ID,item.IV_Document_ID);" ng-class="{active:isSet(item.ID)}">
+                            <td><a href="#/workItemView/{{item.Document_Type}}/{{item.IV_Document_ID}}/{{item.ID}}/003" target="_blank">View Document</a></td>
+                            
+                            <td ng-repeat="(key,value) in item">{{value | translate}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="pagination-wrapper" ng-show="isTableVisible">
+                <div class="left items-count" ng-show="!isLoading">
+                    {{from+1}} - {{to}} {{'of' | translate}} {{totalText}}
+                </div>
+                <div class="right">
+                 <uib-pagination boundary-links="true" total-items="totalItems" ng-model="currentPage" items-per-page="itemsPerPage" ng-change="pageChanged()"  previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" num-pages="pageCount"></uib-pagination>
+                </div>
+                <div class="items-list-options right">
+                    {{'Show' | translate}} :
+                    <span>
+
+                        <select ng-init="itemsPerPageOnSelect = itemListOption[1]" ng-model="itemsPerPageOnSelect"  ng-change="getItemsPerPage(itemsPerPageOnSelect)" ng-options="i for i in itemListOption">
+                        </select>
+                    </span>
+                    {{'per page' | translate}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,10 @@
+<div class="date-picker" ng-controller="datePickerController">
+    <p class="input-group">
+        <input type="text" class="input-date" placeholder="{{placeholder}}" class="form-control" uib-datepicker-popup="{{dateFormat | split : ' ' : 0}}" ng-model="ngModel" is-open="opened" min="minDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="datePickerRequired" close-text="Close" data-format="dateFormat" ng-blur="getDateChange($event,dateFormatUpdated)" ng-disabled="readOnly"/>
+       
+        <span class="input-group-btn">
+            <button class="btn btn-default" ng-click="open($event)"><i class="fa fa-calendar" aria-hidden="true"></i></button>
+        </span>
+    </p>
+</div>
+

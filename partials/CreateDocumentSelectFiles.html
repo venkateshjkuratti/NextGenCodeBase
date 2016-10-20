@@ -1,0 +1,20 @@
+<div class="select-files">
+    <div class="desp">
+        <div class="file-types left">
+            <h5>{{'Select file to upload' | translate}}</h5>
+            <!--<h6 class="note">*Note: Only the file types [ PDF/Word/Excel/PowerPoint/Outlook Message/TIFF/JPEG ] can be selected for upload</h6>-->
+            <h6 class="note">{{'*Note: Only the file type [ PDF ] can be selected for upload' | translate}}</h6>
+        </div>
+        <div class="left choose-file">
+            <input class="hide" type="file" valid-file ng-model="user.inputFile" file-input="uploadDocument" accept="application/pdf" ng-required="true" name="file-upload" id="file-upload">
+            <label a-disabled="uploadedFileList.length>0 && isFileExist" class="btn blue browse-file" for="file-upload" class="custom-file-upload">{{'Browse' | translate}}</label>
+        </div>
+        <div class="uploaded-files-list full-width" ng-show="isFileExist">
+            <div class="file-list card left" ng-init="radioModel=''" ng-show="!isUploadedListExist" ng-repeat="i in uploadedFileList">
+                <img class="left" src="assets/images/{{i.type | fileType }}.png" /> {{i.name | translate}}
+                <img src="assets/images/delete.png" class="delete right" ng-click="deleteFile($index)" />
+            </div>
+        </div>
+        <div class="fileType left"></div>
+    </div>
+</div>

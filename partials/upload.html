@@ -1,0 +1,19 @@
+<div class="web-upload">
+    <div class="content">
+        <div class="head-wrapper">
+            <div class="left">
+                <h4>{{'Create Document' | translate}}</h4>
+                <h5>{{'Select a Business Area and document type. When the indexing fields are complete select a document to upload and then execute the submit button' | translate}}</h5>
+            </div>
+        </div>
+        <div class="content-desp">
+            <form name="webUploadForm" class="upload-form" novalidate>
+                <div class="accordion" accordion accordion-list="{{createDocumentLists}}" accordion-list-default-active="{{documentType}}"></div>
+                <div class="submit-options">
+                    <button type="reset" class="left btn violet" ng-click="resetForm()">{{'Reset' | translate}}</button>
+                    <button type="button" class="right btn orange" ng-disabled="uploadedFileList.length==0||isFormValid()" ng-click="submitForm()">{{'Submit' | translate}}</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

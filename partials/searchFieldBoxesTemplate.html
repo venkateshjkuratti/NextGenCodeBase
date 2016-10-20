@@ -1,0 +1,57 @@
+<div class="search-field-boxes" ng-class="toLowercase(searchFieldBoxTemplatesType)">
+    <div class="text-box" ng-if="toLowercase(searchFieldBoxTemplatesType)==controlTypeEmitters.textBox">
+        <div class="searchFieldLabel">
+            <super class="mandatory" ng-if="(searchFieldBoxModule=='upload' || searchFieldBoxModule=='viewer') && searchFieldBoxRequired">*</super><span>{{searchFieldBoxTemplatesLabel | translate }}</span>
+        </div>
+        <select class="select prefix" ng-if="searchFieldBoxModule=='retrieval'">
+            <option ng-repeat="(key, value) in searchFieldBoxTemplatesOperators" value="{{key}}">{{value | translate}}</option>
+        </select>
+        <input class="input-text mdl-textfield__input" type="text" value="" ng-model="searchFieldBoxTemplatesObject" ng-disabled="searchFieldBoxTemplatesPermission" ng-required="searchFieldBoxRequired" />
+    </div>
+
+    <div class="select-box" ng-if="toLowercase(searchFieldBoxTemplatesType)==controlTypeEmitters.comboBox" ng-required="searchFieldBoxRequired">
+        <div class="searchFieldLabel">
+            <super class="mandatory" ng-if="(searchFieldBoxModule=='upload' || searchFieldBoxModule=='viewer') && searchFieldBoxRequired">*</super><span>{{searchFieldBoxTemplatesLabel | translate }}</span>
+
+        </div>
+        <select class="select show form-control" ng-if="searchFieldBoxModule=='upload'" ng-model="searchFieldBoxTemplatesSelect" ng-disabled="searchFieldBoxTemplatesPermission" ng-options="i.ComboOrder as i.ComboValue | translate for i in searchFieldBoxTemplatesSelects track by i.ComboOrder">
+            <option ng-disabled="defaultSelectBoxValue" value="">{{'Select a value' | translate}}</option>
+        </select>
+
+        <select class="select prefix" ng-if="searchFieldBoxModule=='retrieval'">
+            <option ng-repeat="(key, value) in searchFieldBoxTemplatesOperators" value="{{key}}">{{value | translate}}</option>
+        </select>
+
+        <select class="select show form-control" ng-model="searchFieldBoxTemplatesSelect" ng-if="searchFieldBoxModule=='retrieval'">
+            <option value="">{{'Select a value' | translate}}</option>
+            <option ng-repeat="i in searchFieldBoxTemplatesSelects" value="{{i.ComboOrder}}">{{i.ComboValue | translate}}</option>
+        </select>
+
+        <select class="select show form-control" ng-if="searchFieldBoxModule=='viewer'" ng-model="searchFieldBoxTemplatesSelect" ng-options="i.ComboOrder as i.ComboValue | translate for i in searchFieldBoxTemplatesSelects track by i.ComboOrder">
+            <option value="">{{'Select a value' | translate}}</option>
+        </select>
+
+    </div>
+    <div class="date-box input-group" ng-if="toLowercase(searchFieldBoxTemplatesType)==controlTypeEmitters.date">
+        <div class="searchFieldLabel">
+            <super class="mandatory" ng-if="(searchFieldBoxModule=='upload' || searchFieldBoxModule=='viewer') && searchFieldBoxRequired">*</super><span>{{searchFieldBoxTemplatesLabel | translate }}</span>
+        </div>
+        <mydatepicker ng-if="searchFieldBoxModule=='retrieval'" placeholder="{{'From Date' | translate }}" ng-model="searchFieldBoxTemplatesObject" date-options="dateOptions" opened="opened" ng-required-picker="fromDatePickerRequired" date-format="searchFieldBoxTemplatesFormat" />
+        <mydatepicker ng-if="searchFieldBoxModule=='retrieval'" placeholder="{{'To Date' | translate }}" ng-model="searchFieldBoxTemplatesObject" date-options="dateOptions" opened="opened" ng-required-picker="searchFieldBoxRequired" date-format="searchFieldBoxTemplatesFormat" />
+        <mydatepicker ng-if="searchFieldBoxModule=='upload' || searchFieldBoxModule=='viewer'" ng-model="searchFieldBoxTemplatesObject" date-options="dateOptions" opened="opened" ng-required-picker="searchFieldBoxRequired" date-format="searchFieldBoxTemplatesFormat" read-only="searchFieldBoxTemplatesPermission" />
+    </div>
+
+    <div class="check-box" ng-if="toLowercase(searchFieldBoxTemplatesType)==controlTypeEmitters.checkBox">
+
+        <div class="left check-wrapper">
+            <input type="checkbox" name="{{searchFieldBoxTemplatesLabel}}" id="{{searchFieldBoxTemplatesLabel}}" ng-model="searchFieldBoxTemplatesCheck" class="mdl-checkbox__input" ng-disabled="searchFieldBoxTemplatesPermission" ng-required="searchFieldBoxRequired" />
+            <label name="checks" class="checks left custom-checks" for="{{searchFieldBoxTemplatesLabel}}">
+                <div class="clear label-name">{{searchFieldBoxTemplatesLabel | translate }}
+                    <super class="mandatory" ng-if="(searchFieldBoxModule=='upload' || searchFieldBoxModule=='viewer') && searchFieldBoxRequired">*</super>
+                </div>
+            </label>
+
+        </div>
+
+    </div>
+</div>

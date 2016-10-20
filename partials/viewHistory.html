@@ -1,0 +1,85 @@
+<div modal-element="history">
+    <div class="modal-header main-labels-static mdl-shadow--2dp">
+        <h5 class="modal-title left">{{'Workflow History' | translate}}</h5>
+        <div class="close right" ng-click="cancel()"><i class="fa fa-times" aria-hidden="true"></i></div>
+    </div>
+    <div class="modal-body">
+        <div class="loader" ng-show="isloading">
+            <div class="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active"></div>
+         </div>
+        <div class="imgv-workitem-basket table-responsive clear" ng-show="isDataAvailable">
+            <div class="topSection mb15">
+                <h6 class="mb5">{{'Instance ID' | translate}}</h6>
+                <select ng-init="selInstanceId='0'"  ng-model="selInstanceId" ng-change="updateHistory(selInstanceId)">
+                    <option ng-repeat="(key, value) in instanceIds" value="{{key}}">{{value | translate}}</option>
+                </select>
+            </div>
+            <div class="topContent">
+                <div class="cnt left">
+                    <h6 class="modalLabel">{{'Document ID' | translate}}:</h6><div class="modalVal docId"></div>
+                    <h6 class="modalLabel">{{'Work Item ID' | translate}}:</h6><div class="modalVal workItemId"></div>
+                    <h6 class="modalLabel">{{'Storage Repository ID' | translate}}:</h6><div class="modalVal fileNetId"></div>
+                </div>
+                <div class="cnt left">
+                   <h6 class="modalLabel">{{'Finishing Date' | translate}}:</h6><div class="modalVal finishDate"></div>
+                   <h6 class="modalLabel">{{'Create Date' | translate}}:</h6><div class="modalVal createDate"></div> 
+                   <h6 class="modalLabel">{{'Finishing User' | translate}}:</h6><div class="modalVal finishUser"></div> 
+                </div>
+            </div>
+                <table class="table mdl-data-table mdl-js-data-table mdl-shadow--2dp">
+                    <thead>
+                        <tr>
+                            <th>{{'Move Date' | translate}}
+                            <div class="sort">
+                                <i ng-click="sortItems('MoveDate','MoveDateAsc')" class="fa fa-sort-asc" aria-hidden="true" ng-class="{active:isSetOrder('MoveDateAsc')}"></i>
+                                <i ng-click="sortItems('-MoveDate','MoveDateDesc')" class="fa fa-sort-desc" aria-hidden="true" ng-class="{active:isSetOrder('MoveDateDesc')}"></i>
+                            </div>  
+                            </th>
+                            <th>{{'From Queue' | translate}}
+                            <div class="sort">
+                                <i ng-click="sortItems('FromPA','FromPAAsc')" class="fa fa-sort-asc" aria-hidden="true" ng-class="{active:isSetOrder('FromPAAsc')}"></i>
+                                <i ng-click="sortItems('-FromPA','FromPADesc')" class="fa fa-sort-desc" aria-hidden="true" ng-class="{active:isSetOrder('FromPADesc')}"></i>
+                            </div>
+                            </th>
+                            <th>{{'To Queue' | translate}}
+                            <div class="sort">
+                                <i ng-click="sortItems('ToPA','ToPAAsc')" class="fa fa-sort-asc" aria-hidden="true" ng-class="{active:isSetOrder('ToPAAsc')}"></i>
+                                <i ng-click="sortItems('-ToPA','ToPADesc')" class="fa fa-sort-desc" aria-hidden="true" ng-class="{active:isSetOrder('ToPADesc')}"></i>
+                            </div>
+                            </th>
+                            <th>{{'User Name' | translate}}
+                            <div class="sort">
+                                <i ng-click="sortItems('UserName','UserNameAsc')" class="fa fa-sort-asc" aria-hidden="true" ng-class="{active:isSetOrder('UserNameAsc')}"></i>
+                                <i ng-click="sortItems('-UserName','UserNameDesc')" class="fa fa-sort-desc" aria-hidden="true" ng-class="{active:isSetOrder('UserNameDesc')}"></i>
+                            </div>
+                            </th>
+                            <th>{{'Action' | translate}} 
+                            <div class="sort">
+                                <i ng-click="sortItems('WorkflowAction','WorkflowActionAsc')" class="fa fa-sort-asc" aria-hidden="true" ng-class="{active:isSetOrder('WorkflowActionAsc')}"></i>
+                                <i ng-click="sortItems('-WorkflowAction','WorkflowActionDesc')" class="fa fa-sort-desc" aria-hidden="true" ng-class="{active:isSetOrder('WorkflowActionDesc')}"></i>
+                            </div>
+                            </th>
+                            <th>{{'User Comments' | translate}}
+                            <div class="sort">
+                                <i ng-click="sortItems('UserComments','UserCommentsAsc')" class="fa fa-sort-asc" aria-hidden="true" ng-class="{active:isSetOrder('UserCommentsAsc')}"></i>
+                                <i ng-click="sortItems('-UserComments','UserCommentsDesc')" class="fa fa-sort-desc" aria-hidden="true" ng-class="{active:isSetOrder('UserCommentsDesc')}"></i>
+                            </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="rows" ng-repeat="item in viewHistoryDetails | orderBy:sort | filter:listItems |  limitInstances:from:to" ng-click="setInstances($index)" ng-class="{active:isSet($index)}">
+                            <td>{{item.MoveDate | translate}}</td>
+                            <td>{{item.FromPA | translate}}</a></td>
+                            <td>{{item.ToPA | translate}}</td>
+                            <td>{{item.UserName | translate}}</td>
+                            <td>{{item.WorkflowAction | translate}}</td>
+                            <td>{{item.UserComments | translate}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div ng-show="!isDataAvailable" class="alert alert-success">{{message | translate}}</div>
+    </div>
+   
+</div>

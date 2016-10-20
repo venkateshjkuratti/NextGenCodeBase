@@ -1,0 +1,25 @@
+<div class="upload-options">
+    <div class="check-lists">
+        <div class="lists left">
+            <input type='checkbox' name='workflow' id="workflow" ng-checked="user.sendToWorkflow" ng-click="getSendToWorkFlow()" />
+            <label for="workflow" a-disabled="!isSendToWorkFlowEnabled || !selectResults.DefaultStartingQueue">{{'Send to Workflow' | translate}}</label>
+        </div>
+        <!--  <div class="lists left">
+            <input type='checkbox' name='createPDF' id="createPDF" />
+            <label for="createPDF">Create PDF Image of Uploaded File(s)</label>
+        </div> -->
+        <div class="lists left">
+            <input type='checkbox' name='notify' id="notify" ng-checked="user.sendToNotification" ng-click="getSendToNotification()" />
+            <label for="notify" a-disabled="!isSendToNotificationEnabled">{{'Send Notification Email' | translate}}</label>
+        </div>
+    </div>
+    <div class="cards card" ng-show="user.sendToWorkflow && (selectResults.StartingQueueOptions.length > 0 || selectResults.DefaultStartingQueue)">
+        <div class="select-queue">
+            <div class="left queue-text">{{'Select queue to start document' | translate}}</div>
+            <select ng-model="user.uploadOptionsQueueOnSelect" ng-options="i.QueueName  | translate for i in documentQueue track by i.QueueId" ng-required="user.sendToWorkflow && (selectResults.StartingQueueOptions.length > 0)">
+                <option ng-if="selectResults.DefaultStartingQueue == null" disabled value="">{{'Select a Queue' | translate}}</option>
+
+            </select>
+        </div>
+    </div>
+</div>

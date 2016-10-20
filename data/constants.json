@@ -1,0 +1,33 @@
+{
+	"apiUrls": [{
+        "RegisterPrincipal": "data/userDetails.json",
+		"myWorkItemBasket": "data/routingButton.json",
+        "adminTreeGetWorkflows":"https://nextgendigitalimagingapitest.corp.pep.pvt/api/UserAccount/GetUserWorkflows/",
+        "adminTreeGetWorkQueues":"https://nextgendigitalimagingapitest.corp.pep.pvt/api/Workflow/GetWorkFlowQueueStats/",
+        "adminTreeGetWorkItems":"https://nextgendigitalimagingapitest.corp.pep.pvt/api/Workflow/GetWorkItems/",
+        "routingActions":"https://nextgendigitalimagingapitest.corp.pep.pvt/api/WorkflowManager/MoveWorkItem/09174029",
+        "workItemBasketViewHistoryByWKID":"https://nextgendigitalimagingapitest.corp.pep.pvt/api/WorkflowManager/GetWorkItemHistoryByWkID/09174029",
+        "workItemBasketViewHistoryByFNID":"https://nextgendigitalimagingapitest.corp.pep.pvt/api/WorkflowManager/GetWorkItemHistoryByFNID/09174029",
+        "workItemBasketViewNotesByWKID":"https://nextgendigitalimagingapitest.corp.pep.pvt/api/WorkflowManager/GetWorkItemNotesByWkID/09174029",
+        "workItemBasketViewNotesByFNID":"https://nextgendigitalimagingapitest.corp.pep.pvt/api/WorkflowManager/GetWorkItemNotesByFNID/09174029",
+        "addNotes":"https://nextgendigitalimagingapitest.corp.pep.pvt/api/WorkflowManager/AddWorkItemNote/09174029",
+        "uploadFile":"https://nextgendigitalimagingapitest.corp.pep.pvt/api/StorageObject/UpdateDocument/09174029",
+        "getDocumentTypes":"https://nextgendigitalimagingapitest.corp.pep.pvt/api/StorageObject/GetDocumentTypes/",
+        "updateDocumentType":"https://nextgendigitalimagingapitest.corp.pep.pvt/api/Admin/UpdateDocumentType/09174029",
+        "activateWorkItem":"https://nextgendigitalimagingapitest.corp.pep.pvt/api/Admin/UpdateWorkitemStatus/09174029",
+        "deleteWorkItem":"https://nextgendigitalimagingapitest.corp.pep.pvt/api/Admin/DeleteDocument/09174029",
+    "reAssignWorkItem":"https://nextgendigitalimagingapitest.corp.pep.pvt/api/Admin/AssignOrReleaseWorkItem/09174029",
+        "link":"https://nextgendigitalimagingapitest.corp.pep.pvt/api/StorageObject/GetDocumentLink/09174029",
+        "reAssignItemGpIds":"https://nextgendigitalimagingapitest.corp.pep.pvt/api/Admin/GetUserList/09174029",
+        "retrievalSelectField":"https://nextgendigitalimagingapitest.corp.pep.pvt/api/Admin/GetSearchParams/09174029",
+        "retrievalSearchField": "https://nextgendigitalimagingapitest.corp.pep.pvt/api/StorageObject/GetDocuments/",
+        "retrievalSearchResults": "data/retrieval.json",
+        "getDocumentProperties": "https://nextgendigitalimagingapitest.corp.pep.pvt/api/StorageObject/GetDocumentProperties/09174029",
+        "getUserPreferences": "https://nextgendigitalimagingapitest.corp.pep.pvt/api/WorkflowManager/GetWorkItems/09174029",
+        "saveUserPreferences": "https://nextgendigitalimagingapitest.corp.pep.pvt/api/WorkflowManager/AddUserPreferences/09174029"
+
+
+	}]
+}
+
+

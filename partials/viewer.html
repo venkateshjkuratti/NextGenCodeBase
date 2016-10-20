@@ -1,0 +1,37 @@
+<div class="viewer-container">
+    <div class="main-labels-static mdl-shadow--2dp mdl-navigation">
+        <ul class="lists">
+            <li><a href="javascript:"><i class="fa fa-print" aria-hidden="true"></i>{{'Print/Save' | translate}}</a></li>
+            <li><a href="javascript:"><i class="fa fa-envelope" aria-hidden="true"></i>{{'EMAIL' | translate}}</a></li>
+            <li><a href="javascript:" ng-click="getICNUrl()" ng-class="{active:isDropDownActive('copy')}"><i class="fa fa-link" aria-hidden="true"></i>{{'Link' | translate}}</a></li>
+            <li><a href="javascript:" ng-click="addFilesWorkItem()"><i class="fa fa-plus" aria-hidden="true"></i>{{'Add Pages' | translate}}</a></li>
+            <li><a href="javascript:" ng-click="addNotesWorkItem()"><i class="fa fa-plus" aria-hidden="true"></i>{{'Add Notes' | translate}}</a></li>
+            <li><a href="javascript:"><i class="fa fa-file-excel-o" aria-hidden="true"></i>{{'Export to Excel' | translate}}</a></li>
+            <li><a href="javascript:" ng-click="showViewHistoryWorkItemView()"><i class="fa fa-history" aria-hidden="true" ></i>{{'View History' | translate}}</a></li>
+            <li><a href="javascript:" ng-click="showViewNotesWorkItemView()"><i class="fa fa-file-text-o" aria-hidden="true"></i>{{'View Notes' | translate}}</a></li>
+            <li><a href="javascript:" ng-click="reDirectToPreviousPage()" class="back"><i class="fa fa-times-circle" aria-hidden="true"></i>{{'Close' | translate}}</a></li>
+        </ul>
+    </div>
+    <div class="alert alert-danger" role="alert" ng-show="error">{{'Unable to move the Work Item' | translate}}<i class="fa fa-close right" aria-hidden="true" ng-click="error=false"></i></div>
+    <div class="main-labels-dynamic">
+        <button ng-repeat="btn in routingButtons" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored routing-btns" ng-click="MoveWorkItem(btn.ID,btn.Name)">{{btn.Name | translate}}</button>
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored routing-btns" ng-click="MoveWorkItem(prevWorkflowQueueID,'Return')" ng-disabled="prevWorkflowQueueID==3">{{'Return' | translate}}</button>
+    </div>
+    <div class="loader" ng-show="isViewerFieldsLoading">
+        <div class="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active"></div>
+    </div>
+    <div class="content" ng-show="!isViewerFieldsLoading">
+
+
+        <div class="image-viewer-left left">
+
+            <iframe id="viwerIframe" height="700" src="{{iframeUrl}}"></iframe>
+
+        </div>
+        <div class="image-viewer-right left">
+
+            <div class="image-viewer">
+                <div class="field" search-field-box-templates ng-repeat="r in imageViewerFieldsDetails" search-field-box-templates-object="r.sFieldValues" search-field-box-templates-label="r.sFieldName | translate" search-field-box-templates-type="r.sFieldControlName" search-field-box-templates-selects="r.ComboValues" search-field-box-templates-permission="r.sFieldType"></div>
+            </div>
+        </div>
+    </div>

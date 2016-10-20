@@ -1,0 +1,38 @@
+<div class="addPage">
+    <div class="modal-header">
+        <div class="list-icon left"><img ng-src="assets/images/add-page-popup.png" aria-hidden="true" src="assets/images/add-page-popup.png"></div>
+        <h5 class="modal-title left">{{'ADD PAGES' | translate}}</h5>
+        <div class="close" ng-click="cancel()"><i class="fa fa-close" aria-hidden="true"></i></div>
+    </div>
+    <div class="modal-body">
+        <div class="select-files create-document-lists">
+            <div class="desp">
+                <div class="file-types left">
+                    <div class="title">{{'Browse files to upload' | translate}}</div>
+                    <div class="note">{{'*Note: Only the file types [PDF] can be selected for upload' | translate}}</div>
+                </div>
+                <div class="left choose-file addPageModal">
+                    <div ng-show="uploadedList.length==0">
+                        <input class="hide" type="file" valid-file ng-model="user.inputAddFile" file-input="addDocument" accept="application/pdf" ng-required=true name="add-file" id="add-file" ng-click="uploadSuccess = false;">
+                        <label a-disabled="uploadedList.length>0" class="btn blue browse-file" for="add-file" class="custom-file-upload">{{'Browse' | translate}}</label>
+                    </div>
+                    <div ng-show="uploadedList.length>0">
+                        <button class="btn orange browse-file" a-disabled="isUploading" ng-click="addPageUploader()" >{{'Upload' | translate}}</button>
+                    </div>                    
+                    <div class="loader" ng-show="isUploading">
+                        <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
+                    </div>
+                </div>
+                <div class="uploaded-files-list full-width" ng-show="isFileExist">
+                    <div class="file-list card left" ng-init="radioModel=''" ng-show="!isUploadedListExist" ng-repeat="i in uploadedList">
+                        <img class="left" src="assets/images/{{i.type | fileType }}.png" /> {{i.name | translate}}
+                        <img src="assets/images/delete.png" class="delete right" ng-click="deleteFile($index)" />
+                    </div>
+                    <div ng-show="uploadSuccess" class="success">{{'File uploaded succesfully!' | translate}}</div>
+                    <div ng-show="uploadFailure" class="error">{{'Error in uploading file.' | translate}}</div>
+                </div>
+                <div class="fileType left"></div>
+            </div>
+        </div>
+    </div>
+</div>
