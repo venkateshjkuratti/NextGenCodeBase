@@ -16,7 +16,8 @@ ImgVisionApp.controller('myWorkItemViewController', function($rootScope, $scope,
     var itemData = null;
     
     var staticTabLink;
-    
+    //$scope.isTrafficCop = $routeParams.isTrafficCop ? true : false;
+
     $scope.isLoading = true;
     $scope.isReadOnly = false;
     var workFlowViewEmitter = {

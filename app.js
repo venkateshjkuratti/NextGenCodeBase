@@ -20,7 +20,7 @@ ImgVisionApp.config(function($routeProvider, $httpProvider, $locationProvider, $
         .when("/admin", {
             templateUrl: "partials/admin.html",
             controller: "adminController"
-        }).when("/workItemView/:docTypeId/:instanceId/:storageRepoId/:type", {
+        }).when("/workItemView/:docTypeId/:instanceId/:storageRepoId/:type/", {
             templateUrl: "partials/myWorkItemView.html",
             controller: "myWorkItemViewController"
         }).when("/retrieval", {
