@@ -36,8 +36,8 @@
                     </thead>
                     <tbody>
 
-                        <tr class="rows dnd-moved" ng-repeat="item in searchResults | orderBy:sort |  filter:listItems | limitInstances:from:to"  ng-click="setInstances(item,item.ID,item.IV_Document_ID);" ng-class="{active:isSet(item.ID)}">
-                            <td><a href="#/workItemView/{{item.Document_Type}}/{{item.IV_Document_ID}}/{{item.ID}}/003" target="_blank">View Document</a></td>
+                        <tr class="rows dnd-moved" ng-repeat="item in searchResults | orderBy:sort |  filter:listItems | limitInstances:from:to"  ng-click="setInstances(item,item.ID,item.IV_Document_ID);" ng-class="{active:isSet(item.IV_Document_ID)}">
+                            <td><a href="#/documentViewer/1/{{item.IV_Document_ID}}/{{item.Document_Type}}/1/{{item.ID}}/003" target="_blank">View Document</a></td>
                             
                             <td ng-repeat="(key,value) in item">{{value | translate}}</td>
                         </tr>

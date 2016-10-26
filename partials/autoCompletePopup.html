@@ -1,0 +1,9 @@
+<ul class="dropdown-menu" ng-show="isOpen() && !moveInProgress" ng-style="{top: position().top+'px', left: position().left+'px'}" style="display: block;" role="listbox" aria-hidden="{{!isOpen()}}">
+    <li style="border-bottom: solid 1px lightgray" class="customFadeAnimate" ng-repeat="match in matches | startFrom:((currentPage*20)-20+1) | limitTo: 20 track by $index " ng-class="{active: isActive($index) }" ng-mouseenter="selectActive($index)" ng-click="selectMatch($index)" role="option" id="{{::match.id}}">
+        <div uib-typeahead-match index="$index" match="match" query="query" template-url="templateUrl"></div>
+    </li>
+    <div ng-click="$event.stopPropagation()" ng-hide="matches.length - 8 < 1" style="text-align:center;margin: 5px;color: #808080;min-width:250px">
+        <span> {{((currentPage || 1)*20)-20+1}} to {{((currentPage || 1)*20 > matches.length) ? matches.length : (currentPage || 1)*20}} of {{matches.length}}     </span>
+        <uib-pager style="margin-top:-20px;margin-bottom:4px" total-items="matches.length" ng-model="currentPage" items-per-page="8" align="true" previous-text="Prev" next-text="Next"></uib-pager>
+    </div>
+</ul>

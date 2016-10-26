@@ -1,16 +1,20 @@
 ImgVisionApp.controller('ModalInstanceDocumentNotesController', function ($rootScope, $scope, $uibModalInstance, $location, $http, $routeParams, urlConstants, userDetailsServices,commonServices, retrievalResultsServices,adminServices,docId,items) {
 
     $scope.isloading = true;
-    $scope.isWorkflowDocument = $location.path() == '/admin';
+    $scope.isWorkflowDocument = ($location.path() == '/admin' || $location.path().indexOf("002") != -1);
+    
     userDetailsServices.getUserSystemId().then(function (response) {
         
       //console.log(items +" "+docId)
         var viewnotesUrl = '';
         var instanceId = docId;
-        var fileNetId = ($location.path() == '/retrieval')?retrievalResultsServices.getFileNetId():( $location.path().indexOf("workItemView")>-1)?$routeParams.storageRepoId.split("_")[1]:adminServices.getStorageRepoId();
+        var fileNetId = ($location.path() == '/retrieval')?retrievalResultsServices.getFileNetId():( $location.path().indexOf("documentViewer")>-1)?$routeParams.storageRepoId.split("_")[1]:adminServices.getStorageRepoId();
         
         var currModalURL= urlConstants.viewDocumentNotes;
         viewnotesUrl =  currModalURL + $rootScope.userDetails.UserName + '/'+response +'/'+instanceId;
+        
+        console.log(instanceId);
+        
         $http.get(viewnotesUrl).success(function (response) {            
             angular.element(".instanceId").text(instanceId);
             angular.element(".documentId").text(fileNetId);
@@ -62,8 +66,16 @@ ImgVisionApp.controller('ModalInstanceDocumentNotesController', function ($rootS
       
     
       userDetailsServices.getUserSystemId().then(function (response) {
-          var instanceId = items;
-          
+          var instanceId;
+          console.log('sgg'+items);
+          //for Retrieval page since it doesn't has a docTypeId
+          if($location.path() == '/retrieval' || items==1){
+             instanceId = docId;
+           }
+          else{
+              instanceId = items;
+          }
+                    
           var addNotesURL = urlConstants.addDocumentNotes;        
           
         addNotesFinalURL = addNotesURL + $rootScope.userDetails.UserName + '/'+response +'/'+instanceId;

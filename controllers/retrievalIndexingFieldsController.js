@@ -151,11 +151,11 @@ ImgVisionApp.controller('retrievalIndexingFieldsController', function ($rootScop
     $scope.isSet = function (id) {
         return $scope.instanceRow === id;
     }
-    $scope.setInstances = function (currRow, documentId, instanceId) {
+    $scope.setInstances = function (currRow, fileNetId, documentId) {
         if ($scope.instanceRow != documentId) {
             retrievalResultsServices.setDocId(documentId);
-            retrievalResultsServices.setFileNetId(documentId);
-            retrievalResultsServices.setInstanceId(instanceId);
+            retrievalResultsServices.setFileNetId(fileNetId);
+           // retrievalResultsServices.setInstanceId(instanceId);
             retrievalResultsServices.setSelectedRow(currRow);
             $scope.instanceRow = documentId;
 
@@ -177,7 +177,7 @@ ImgVisionApp.controller('retrievalIndexingFieldsController', function ($rootScop
             $scope.instanceRow = -1;
             retrievalResultsServices.setDocId(null);
             retrievalResultsServices.setFileNetId(null);
-            retrievalResultsServices.setInstanceId(null);
+           // retrievalResultsServices.setInstanceId(null);
             retrievalResultsServices.setSelectedRow(null);
             retrievalResultsServices.setAdminTabsDisabled(true);
             $scope.showWorkItemStatusMessage = false;

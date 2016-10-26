@@ -103,6 +103,9 @@ ImgVisionApp.controller('retrievalController', function ($rootScope, $scope, $ht
             resolve: {
                 items: function () {
                     return retrievalResultsServices.getInstanceId();
+                },
+                docId: function () {
+                    return retrievalResultsServices.getDocId();
                 }
             }
         });
@@ -121,7 +124,7 @@ ImgVisionApp.controller('retrievalController', function ($rootScope, $scope, $ht
                     return retrievalResultsServices.getInstanceId();
                 },
                 docId: function(){
-                   return retrievalResultsServices.getInstanceId();  
+                   return retrievalResultsServices.getDocId();  
                 }
             }
         });
@@ -145,7 +148,7 @@ ImgVisionApp.controller('retrievalController', function ($rootScope, $scope, $ht
                      return retrievalResultsServices.getInstanceId();
                 },
                 docId: function(){
-                   return retrievalResultsServices.getInstanceId();  
+                   return retrievalResultsServices.getDocId();  
                 }
             }
         });

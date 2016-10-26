@@ -1,4 +1,4 @@
-ImgVisionApp.controller('ModalInstanceAddFilesController', function ($scope, $http, $uibModalInstance, $location,$window, uploadServices, $rootScope, urlConstants, userDetailsServices, retrievalResultsServices, items) {
+ImgVisionApp.controller('ModalInstanceAddFilesController', function ($scope, $http, $uibModalInstance, $location, uploadServices, $rootScope, urlConstants, userDetailsServices, retrievalResultsServices, items) {
     var addPageURL = "";
     $scope.uploadedList = [];
     $scope.deleteFile = function (index) {

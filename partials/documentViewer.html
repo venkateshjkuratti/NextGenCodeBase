@@ -1,0 +1,68 @@
+<div class="my-work-item-view-container">
+    <div class="main-labels-static mdl-shadow--2dp mdl-navigation left">
+        <ul class="lists">
+            <li>
+                <a href="javascript:" ng-click="showEmailModal()"><img ng-src="assets/images/mail.png" />{{'Email' | translate}}</a>
+            </li>
+            <li>
+                <a href="javascript:" copy-to-clipboard="{{link}}" ng-click="copyLink()" ng-class="{active:isDropDownActive('copy')}"><img ng-src="assets/images/link.png" />{{'Link' | translate}}</a>
+            </li>
+            <li>
+                <a href="javascript:" ng-click="downloadWorkItem()"><img ng-src="assets/images/download .png" />{{'Print/Save' | translate}}</a>
+            </li>
+            <li>
+                <a href="javascript:" a-disabled="isReadOnly" ng-click="addFilesWorkItem()"><img ng-src="assets/images/add{{isReadOnly?'-inactive':''}}.png" />{{'Add Pages' | translate}}</a>
+            </li>
+            <li>
+                <a href="javascript:" ng-click="showViewNotes()"><img ng-src="assets/images/workflow.png" />{{'View Workflow Notes' | translate}}</a>
+            </li>
+            <li>
+                <a href="javascript:" ng-click="showViewHistoryWorkItemView()"><img ng-src="assets/images/view-work-his.png" />{{'View Workflow History' | translate}}</a>
+            </li>
+            <li>
+                <a href="javascript:" ng-click="showDocumentNotesAdmin()"><img ng-src="assets/images/view-doc-note.png" />{{'View Document Notes' | translate}}</a>
+            </li>
+        </ul>
+    </div>
+    <div class="alert alert-danger" role="alert" ng-show="error">{{'Unable to move the Work Item' | translate}}<i class="fa fa-close right" aria-hidden="true" ng-click="error=false"></i></div>
+    <div class="main-labels-dynamic m10">
+
+        <button ng-if="isRoutingButton()" ng-repeat="btn in routingButtons" class="btn routing-btns violet" ng-click="MoveWorkItem(btn.ID,btn.Name)">{{btn.ToQueueName | translate}}</button>
+
+        <select ng-if="!isRoutingButton()" ng-repeat="btn in routingButtons" class="select routing-btns" ng-click="MoveWorkItem(btn.ID,btn.Name)">
+            <option>{{btn.ToQueueName | translate}}</option>
+        </select>
+
+
+        <button class="btn orange right" onclick="window.close()" ng-disabled="prevWorkflowQueueID==3">&#10006;&nbsp;&nbsp;{{'Close' | translate}}</button>
+    </div>
+    <div class="content">
+        <div class="head-wrapper">
+
+        </div>
+        <div class="content-desp">
+            <div class="loader" ng-show="isLoading">
+                <div class="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active"></div>
+            </div>
+            <div class="iframeContainer left">
+                <iframe id="workItemIframe" height="700" width="100%" src="{{iframeUrl}}"></iframe>
+            </div>
+            <div class="create-document-lists left work-item-wrapper">
+                <div class="business-area-wrapper">
+                    <div class="loader" ng-show="isSelectResultsLoading">
+                        <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
+                    </div>
+                    <div ng-show="isSelectResultsAvailable" class="left">
+                        <form name="saveWorkItemForm" novalidate>
+                            <div class="propertiesTitle">{{ 'PROPERTIES' | translate}}</div>
+                            <ul class="field-lists">
+                                <li class="field {{r.ControlName | lowercase}}" search-field-box-templates ng-repeat="r in selectResults" search-field-box-templates-object="r.ValueAsString" search-field-box-templates-label="r.DisplayName" search-field-box-templates-type="r.ControlName" search-field-box-templates-selects="r.ComboValues" search-field-box-required="r.IsMandatory" search-field-box-templates-operators="r.SearchOperatorOptions" search-field-box-templates-format="r.FieldDateFormat.DefaultFormat" search-field-box-module="viewer" search-field-box-templates-permission="isReadOnly" search-field-box-templates-check="r.ValueAsString"></li>
+                            </ul>
+                            <button class="btn blue saveIndexFieldsBtn" a-disabled="isReadOnly || saveWorkItemForm.$invalid" ng-click="saveWorkItem()">{{'Save' | translate}}</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

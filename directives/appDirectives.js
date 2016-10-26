@@ -158,7 +158,8 @@ ImgVisionApp.directive('searchFieldBoxTemplates', function (uploadServices) {
             searchFieldBoxTemplatesFormat: "=",
             searchFieldBoxTemplatesPermission: "=",
             searchFieldBoxRequired: "=",
-            searchFieldBoxModule: "@"
+            searchFieldBoxModule: "@",
+            searchFieldBoxTemplatesCombo: "="
         },
         link: function (scope, el, attrs) {
 
@@ -173,7 +174,8 @@ ImgVisionApp.directive('searchFieldBoxTemplates', function (uploadServices) {
                 comboBox: 'combo_box',
                 date: 'date',
                 checkBox: 'check_box',
-                readOnly: 'ReadOnly'
+                readOnly: 'ReadOnly',
+                autoComp: 'auto_complete'
             }
 
             scope.toLowercase = function (val) {
@@ -185,7 +187,7 @@ ImgVisionApp.directive('searchFieldBoxTemplates', function (uploadServices) {
 
             if (scope.searchFieldBoxModule == 'viewer' || scope.searchFieldBoxModule == 'upload') {
                 angular.forEach(scope.searchFieldBoxTemplatesSelects, function (obj) {
-                   
+
                     if (obj.ComboValue == scope.searchFieldBoxTemplatesObject) {
                         scope.searchFieldBoxTemplatesSelect = obj;
                     }
@@ -205,7 +207,14 @@ ImgVisionApp.directive('searchFieldBoxTemplates', function (uploadServices) {
 
             });
 
+            if (scope.toLowercase(scope.searchFieldBoxTemplatesType) == scope.controlTypeEmitters.autoComp) {
+                scope.comboValues = [];
+                angular.forEach(scope.searchFieldBoxTemplatesCombo, function (obj) {
+                    scope.comboValues.push(obj.ComboValue);
 
+                });
+                console.log(scope.comboValues);
+            }
 
         },
         controller: function ($scope) {
@@ -213,6 +222,8 @@ ImgVisionApp.directive('searchFieldBoxTemplates', function (uploadServices) {
             this.inputDate = function (val) {
                 $scope.searchFieldBoxTemplatesObject = val;
             }
+            
+            
 
         }
     }
@@ -324,14 +335,14 @@ ImgVisionApp.directive("loader", function () {
     }
 });
 
-ImgVisionApp.directive("showNotification", function (commonServices) {
+ImgVisionApp.directive("showNotification", function (commonServices, $filter) {
     return {
         restrict: "A",
         link: function (scope, element, attrs) {
             scope.$watch(function () {
                 return commonServices.getNotifyMessage()
             }, function (newValue, oldValue) {
-                element.html(newValue);
+                element.html($filter('translate')(newValue));
             });
 
         }

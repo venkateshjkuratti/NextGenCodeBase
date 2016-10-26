@@ -195,7 +195,7 @@ ImgVisionApp.controller('myWorkItemBasketController', function ($scope, myWorkIt
 
         var modalInstance = $uibModal.open({
             animation: $scope.animationsEnabled,
-            templateUrl: 'partials/viewNotes.html',
+            templateUrl: 'partials/WorkflowNotes.html',
             controller: 'ModalInstanceViewNotesController',
             resolve: {
                 items: function () {

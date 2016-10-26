@@ -10,6 +10,13 @@ ImgVisionApp.filter('limitInstances', function () {
     };
 });
 
+ImgVisionApp.filter('startFrom', function () {
+    return function (data, from) {
+        return (data || []).slice(from);
+    };
+});
+
+
 ImgVisionApp.filter('filterDate', function () {
     return function (data) {
         if (data != null) {

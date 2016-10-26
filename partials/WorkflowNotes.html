@@ -49,13 +49,11 @@
                         </tr>
                     </tbody>
                 </table>
-            <div ng-show="!isRetrievalWorkflow">
+            <div class="add-notes-container" ng-show="!isRetrievalWorkflow">
                 <h5>{{'Add Notes' | translate}}</h5>
                 <textarea ng-change="isTextAreaEmpty(notes)" ng-model="notes" cols="78" rows="5"  maxlength="2000"></textarea>
                 <button ng-disabled="isSubmitDisabled" class="addNotesBtn show" ng-click="ok(notes)">{{'Submit' | translate}}</button>
             </div>
             </div>             
-            
     </div>
-   
 </div>

@@ -9,6 +9,18 @@
         <input class="input-text mdl-textfield__input" type="text" value="" ng-model="searchFieldBoxTemplatesObject" ng-disabled="searchFieldBoxTemplatesPermission" ng-required="searchFieldBoxRequired" />
     </div>
 
+    <div class="text-box" ng-if="toLowercase(searchFieldBoxTemplatesType)==controlTypeEmitters.autoComp">
+        <div class="searchFieldLabel">
+            <super class="mandatory" ng-if="(searchFieldBoxModule=='upload' || searchFieldBoxModule=='viewer') && searchFieldBoxRequired">*</super><span>{{searchFieldBoxTemplatesLabel | translate }}</span>
+        </div>
+        <select class="select prefix" ng-if="searchFieldBoxModule=='retrieval'">
+            <option ng-repeat="(key, value) in searchFieldBoxTemplatesOperators" value="{{key}}">{{value | translate}}</option>
+        </select>
+         <input class="input-text mdl-textfield__input" type="text" value="" ng-model="searchFieldBoxTemplatesObject" ng-disabled="searchFieldBoxTemplatesPermission" ng-required="searchFieldBoxRequired" uib-typeahead="val for val in comboValues | filter:$viewValue" />
+        
+        <!--<input class="input-text mdl-textfield__input" type="text" value="" ng-model="searchFieldBoxTemplatesObject" ng-disabled="searchFieldBoxTemplatesPermission" ng-required="searchFieldBoxRequired" />-->
+    </div>
+
     <div class="select-box" ng-if="toLowercase(searchFieldBoxTemplatesType)==controlTypeEmitters.comboBox" ng-required="searchFieldBoxRequired">
         <div class="searchFieldLabel">
             <super class="mandatory" ng-if="(searchFieldBoxModule=='upload' || searchFieldBoxModule=='viewer') && searchFieldBoxRequired">*</super><span>{{searchFieldBoxTemplatesLabel | translate }}</span>

@@ -217,7 +217,7 @@
                         </thead>
                         <tbody>
                             <tr class="rows dnd-moved" ng-repeat="item in adminQueueWorkItemsDetails | orderBy:sort | filter:searchFilter" ng-click="setInstances(item);enableHistoryNotes();multipleSelectRows(adminQueueWorkItemsDetails.indexOf(item),item);" ng-class="{'active':item.selected}">
-                                <td><a href="#/workItemView/{{item.DocumentType}}/{{item.InstanceId}}/{{item.StorageRepositoryId}}/002" target="_blank">{{item.InstanceId | translate}}</a></td>
+                                <td><a href="#/documentViewer/{{item.DocumentTypeId}}/{{item.DocumentId}}/{{item.DocumentType}}/{{item.InstanceId}}/{{item.StorageRepositoryId}}/002" target="_blank">{{item.InstanceId | translate}}</a></td>
                                 <td>{{item.DocumentType | translate}}</td>
                                 <td>{{item.QueueEntryDateAsString | translate}}</td>
                                 <td>{{item.Title | translate}}</td>
@@ -226,7 +226,7 @@
                                 <td ng-if="gpid">{{item.OwningUserGpid | translate}}</td>
                                 <td>{{item.Aging | translate}}</td>
                                 <td>{{item.LatestNote | translate}}</td>
-                                <td ng-repeat="val in item.DynamicProperties track by $index">{{val | translate}}</td>
+                               <!-- <td ng-repeat="val in dynamicColumnVals | orderBy:dynamicSort track by $index">{{val | translate}}</td> -->         <td ng-repeat="val in item.DynamicProperties track by $index">{{val | translate}}</td>
                             </tr>
                         </tbody>
                     </table>

@@ -23,7 +23,6 @@ ImgVisionApp.factory('adminServices', function ($http, $q, $timeout,$rootScope, 
     obj.getAdminTreeWorkFlowData = function () {
 
         userDetailsServices.getUserSystemId().then(function (response) {
-            console.log(response);
             url = urlConstants.adminTreeGetWorkflows+$rootScope.userDetails.UserName+'/'+ response;
             $http.get(url).success(function (response) {
                 responseData = response;

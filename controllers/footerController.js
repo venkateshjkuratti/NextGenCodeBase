@@ -1,5 +1,3 @@
-ImgVisionApp.controller('footerController', function ($scope, $rootScope, commonServices) {
+ImgVisionApp.controller('footerController', function ($scope) {
     $scope.currentDate = new Date();
-
-
 });

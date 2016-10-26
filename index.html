@@ -7,6 +7,19 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+    </script>
     <script src="data/englishLang.js"></script>
     <script src="data/russianLang.js"></script>
     <script src="bower-components/jquery-2.0.3.js"></script>
@@ -27,7 +40,6 @@
     <script src="services/myWorkItemBasketServices.js"></script>
     <script src="services/myWorkItemViewServices.js"></script>
     <script src="services/adminServices.js"></script>
-    <script src="TrafficCop/trafficcopService.js"></script>
     <script src="services/retrievalResultsServices.js"></script>
     <script src="services/commonServices.js"></script>
     <script src="filters/appFilters.js"></script>
@@ -55,7 +67,6 @@
     <script src="controllers/dashboardController.js"></script>
     <script src="controllers/datePickerController.js"></script>
     <script src="controllers/viewerController.js"></script>
-    <script src="TrafficCop/trafficcopController.js"></script>
     <script src="services/uploadServices.js"></script>
     <link rel="stylesheet" href="bower-components/bootstrap.css" />
     <link rel="stylesheet" href="bower-components/bootstrap-theme.min.css" />
@@ -123,7 +134,6 @@
                     <a href="#/upload" class="menu" ng-class="getClass('/upload')">{{ 'Web Upload' | translate  }}<span ng-class="{ 'arrow': getArrow('/upload') }"></span></a>
                     <a href="#/reports" class="menu" ng-class="getClass('/reports')">{{ 'Reports' | translate  }}<span ng-class="{ 'arrow': getArrow('/reports') }"></span></a>
                     <a href="#/dashboard" class="menu" ng-class="getClass('/dashboard')">{{ 'Dashboard' | translate  }} <span ng-class="{ 'arrow': getArrow('/dashboard') }"></span></a>
-                    <a href="#/trafficcop" class="menu" ng-class="getClass('/trafficcop')">{{ 'TrafficCop' | translate  }} <span ng-class="{ 'arrow': getArrow('/trafficcop') }"></span></a>
                 </div>
                 <div class="content-box" ng-view>
 

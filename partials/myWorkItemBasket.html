@@ -86,7 +86,7 @@
                     </thead>
                     <tbody>
                         <tr class="rows dnd-moved" ng-repeat="item in myWorkItemBasketDetails | orderBy:sort |  filter:listItems | limitInstances:from:to" ng-click="setInstances(item.InstanceId, item.DocumentId)" ng-class="{active:isSet(item.InstanceId, item.DocumentId)}">
-                            <td><a href="#/viewer/{{item.InstanceId}}/{{item.DocumentId}}/{{item.PreviousQueueId}}/001">{{item.InstanceId | translate}}</a></td>
+                            <td><a href="#/documentViewer/{{item.InstanceId}}/{{item.DocumentId}}/{{item.PreviousQueueId}}/001">{{item.InstanceId | translate}}</a></td>
                             <td>{{item.Title | translate}}</td>
                             <td>{{item.CreateDateAsString | translate}}</td>
                             <td>{{item.Aging | translate}}</td> 

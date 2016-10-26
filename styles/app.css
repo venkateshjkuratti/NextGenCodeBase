@@ -93,7 +93,6 @@ body {
 .user-details .user,
 .user-details .question {
     border-right: 1px solid #617b96;
-    line-height: 45px;
     padding-right: 5px;
 }
 
@@ -252,7 +251,7 @@ body {
     height: 0;
     border-left: 5px solid transparent;
     border-right: 5px solid transparent;
-    border-bottom: 5px solid #fff;
+    border-bottom: 5px solid #f3f3f3;
     position: absolute;
     left: 46%;
     bottom: -1px;
@@ -282,6 +281,7 @@ body {
     float: left;
     text-align: center;
     margin: 0 1px 0 0;
+    line-height: 20px;
 }
 
 .main-labels-static .lists li i {
@@ -299,6 +299,10 @@ body {
     border-bottom: none;
     border-top: none;
     outline: none;
+}
+
+.main-labels-static .lists li:last-child a {
+    border-right: 0;
 }
 
 .main-labels-static .lists li a img {
@@ -358,7 +362,7 @@ body {
     margin: 5px 0 20px 0;
     float: left;
     width: 100%;
-    overflow: hidden;
+    /*overflow: hidden;*/
 }
 
 .content .content-desp table {
@@ -563,20 +567,22 @@ body {
 .create-document-lists .list-desp {
     background: #f2f2f2;
     max-height: 0;
-    overflow: hidden;
+    /*overflow: hidden;*/
     transition: all 0.25s ease-out;
+    display: none;
 }
 
 .create-document-lists .list-desp.active {
     max-height: 100%;
     transition: all 0.25s ease-in;
     min-height: 100px;
+    display: block;
 }
 
 .create-document-lists .list-desp > div {
     padding: 20px;
     display: block;
-    float: left;
+    /*float: left;*/
     width: 100%;
 }
 
@@ -596,14 +602,12 @@ body {
     margin: 7px 0 0 0;
 }
 
-.create-document-lists .btn,
-.create-document-lists .choose-file .btn,
-.submit-options .btn,.main-labels-dynamic .btn.orange {
+.modal-container .btn, .content .btn, .content-box .btn {
     border-radius: 0;
     min-width: 100px;
     height: 30px;
-    color: #fff;
     line-height: 18px;
+    color: #fff;
 }
 .main-labels-dynamic{
     width: 100%;
@@ -922,13 +926,16 @@ top: 0 !important;
 
 /* retrieval page design */
 
+.retrieval-select-fields-wrapper {
+    overflow: auto;
+}
+
 .retrieval-select-fields {
     padding: 25px 0;
     margin: 15px 0;
     border-top: 1px solid #ccc;
     border-bottom: 1px solid #ccc;
-    float: left;
-    width: 100%;
+    overflow: auto;
 }
 
 .select-business-area h5 {
@@ -1232,7 +1239,7 @@ h6 {
     border: none;
     height: 40px;
     line-height: 12px;
-    margin: 10px 0 0 0;
+    margin: 0 0 10px 0;
 }
 
 .notify {
@@ -1705,6 +1712,11 @@ label.disable {
 
 .modal-dialog.addPage{width: 65%;}
 .modal-body.notes,.modal-body.history{max-height: 630px;overflow: scroll;}
+
+.modal-body .add-notes-container {
+    margin: 20px 0 0 0;
+}
+
 table.resize th {
     position: relative;
     min-width: 10px !important;

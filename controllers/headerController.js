@@ -1,4 +1,4 @@
-ImgVisionApp.controller('headerController', function ($scope, $rootScope, $window, $location, $http, $timeout, $interval, $log, $uibModal, $translate, urlConstants, userDetailsServices, commonServices) {
+ImgVisionApp.controller('headerController', function ($scope, $rootScope, $window, $location, $http, $log, $uibModal, $translate, urlConstants, userDetailsServices, commonServices) {
     /*Sign out functionality --- START*/
     var IDLE_TIMEOUT = 20; //seconds
     var _idleSecondsCounter = 0;

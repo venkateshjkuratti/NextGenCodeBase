@@ -98,12 +98,12 @@ ImgVisionApp.controller('webUploadController', function ($scope, $http, $rootSco
                 //checks whether the checks are enabled or disabled
                 angular.forEach(data, function (item) {               
                     switch (item.PreferenceTitle) {                   
-                        case 'Sent to workflow':
+                        case 'Send to Workflow':
                             $scope.user.sendToWorkflow = (item.PreferenceValue === "true");
                             userPrefWorkFlow = (item.PreferenceValue === "true");
                             $scope.isSendToWorkFlowEnabled = item.CanOverride;
                             break;
-                        case 'Email notification':
+                        case 'Email Notification':
                             $scope.user.sendToNotification = (item.PreferenceValue === "true");
                             $scope.isSendToNotificationEnabled = item.CanOverride;
                             break;

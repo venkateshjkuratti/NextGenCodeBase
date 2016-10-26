@@ -1,9 +1,14 @@
-ImgVisionApp.controller('ModalInstanceUserPreferenceController', function ($rootScope, $scope, $uibModalInstance, $location, $http, userDetailsServices, commonServices, urlConstants) {
+ImgVisionApp.controller('ModalInstanceUserPreferenceController', function ($rootScope, $scope, $filter, $uibModalInstance, $location, $http, userDetailsServices, commonServices, urlConstants) {
     var systemID;
     var getUserPreferencesURL;
     var userPrefData;
     
+    $scope.buttons = false;
+    
+    localStorage.setItem('setUserPerferenceRoutingButton', $scope.buttons);
+    
     $scope.isSetOrder = function (type) {
+        
         return $scope.orderType === type;
     }
     userDetailsServices.getUserSystemId().then(function (response) {
@@ -93,8 +98,16 @@ ImgVisionApp.controller('ModalInstanceUserPreferenceController', function ($root
             }
         }).success(function(response){
             $scope.isUserPreferencesLoading = false;
-            angular.element(".saveUserPrefMsg").text("Saved user preferences for user "+$rootScope.userDetails.UserName+".");
+            var text = $filter('translate')("Saved user preferences for user");
+            angular.element(".saveUserPrefMsg").text(text+' '+$rootScope.userDetails.UserName+".");
+                        
             angular.element(".saveUserPrefMsg").addClass("success");
+             if($scope.buttons){
+              localStorage.setItem('setUserPerferenceRoutingButton', 'button');  
+            }
+            else{
+               localStorage.setItem('setUserPerferenceRoutingButton', 'select'); 
+            }
         }).error(function(response){
             console.log(response);
             $scope.isUserPreferencesLoading = false;

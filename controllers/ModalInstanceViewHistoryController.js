@@ -1,7 +1,6 @@
-ImgVisionApp.controller('ModalInstanceViewHistoryController', function ($rootScope, $scope, $uibModalInstance, $location, $http, retrievalResultsServices, adminServices, userDetailsServices, urlConstants, items) {
+ImgVisionApp.controller('ModalInstanceViewHistoryController', function ($rootScope, $scope, $uibModalInstance, $location, $http, retrievalResultsServices, adminServices, userDetailsServices, urlConstants, docId, items) {
 
     $scope.isloading = true;
-
     $scope.isDataAvailable = false;
     $scope.instanceIds = [];
     $scope.message = '';
@@ -9,7 +8,8 @@ ImgVisionApp.controller('ModalInstanceViewHistoryController', function ($rootSco
     userDetailsServices.getUserSystemId().then(function (response) {
         var viewHistoryUrl = null;
         var params;
-        var instanceId = ($location.path() == '/retrieval' || $location.path().indexOf("workItemView") > -1) ? items : adminServices.getFileNetId();
+        //var instanceId = ($location.path() == '/retrieval' || $location.path().indexOf("documentViewer") > -1) ? items : docId;
+        var instanceId = docId;
         viewHistoryUrl = urlConstants.viewWorkFlowHistory + $rootScope.userDetails.UserName + '/' + response + '/' + instanceId;
         $http.get(viewHistoryUrl).success(function (response) {
             historyResponse = response;

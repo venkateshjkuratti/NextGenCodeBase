@@ -1,6 +1,6 @@
 var ImgVisionApp = angular.module('imgVisionApp', ['ngRoute', 'ngAnimate', 'ui.bootstrap', 'ngResource', 'ngCookies', 'ngTableResize', 'pascalprecht.translate']);
 
-ImgVisionApp.config(function($routeProvider, $httpProvider, $locationProvider, $translateProvider) {
+ImgVisionApp.config(function ($routeProvider, $httpProvider, $locationProvider, $translateProvider, $provide) {
 
     $httpProvider.defaults.useXDomain = true;
     $httpProvider.defaults.withCredentials = false;
@@ -20,8 +20,8 @@ ImgVisionApp.config(function($routeProvider, $httpProvider, $locationProvider, $
         .when("/admin", {
             templateUrl: "partials/admin.html",
             controller: "adminController"
-        }).when("/workItemView/:docTypeId/:instanceId/:storageRepoId/:type/", {
-            templateUrl: "partials/myWorkItemView.html",
+        }).when("/documentViewer/:docTypeId/:docId/:docTypeName/:instanceId/:storageRepoId/:type", {
+            templateUrl: "partials/documentViewer.html",
             controller: "myWorkItemViewController"
         }).when("/retrieval", {
             templateUrl: "partials/retrieval.html",
@@ -35,32 +35,61 @@ ImgVisionApp.config(function($routeProvider, $httpProvider, $locationProvider, $
         }).when("/dashboard", {
             templateUrl: "partials/dashboard.html",
             controller: "dashboardController"
-        }).when("/trafficcop", {
-            templateUrl: "TrafficCop/trafficcop.html",
-            controller: "trafficcopController"
         }).otherwise('/home');
+
 });
 
 
 
-ImgVisionApp.controller('menuController', function($scope, $location, uploadServices) {
-    $scope.getClass = function(path) {
+ImgVisionApp.config(['$provide', Decorate]);
+
+function Decorate($provide) {
+    $provide.decorator('uibTypeaheadPopupDirective', function ($delegate) {
+        var directive = $delegate[0];
+
+        directive.templateUrl = "partials/autoCompletePopup.html";
+
+        return $delegate;
+    });
+}
+
+
+ImgVisionApp.run(function ($rootScope, $location, $window) {
+
+    //google analytics 
+    $window.ga('create', 'UA-73551244-17', 'auto');
+
+    $rootScope.$on('$routeChangeSuccess', function () {
+        $window.ga('send', 'pageview', $location.path());
+    });
+});
+
+ImgVisionApp.controller('menuController', function ($scope, $location, uploadServices) {
+    $scope.getClass = function (path) {
         //uploadServices.setUploadAccordionIndex(0);
-        $scope.$on('$locationChangeStart', function() {
+        $scope.$on('$locationChangeStart', function () {
             uploadServices.setUploadAccordionIndex(0);
         });
 
         return ($location.path().substr(0, path.length) === path) ? 'is-active' : '';
     }
-    $scope.isShowMenu = ($location.path().indexOf('workItemView') > -1) ? false : true;
-    $scope.getArrow = function(path) {
+    
+    $scope.isShowMenu = ($location.path().indexOf('documentViewer') > -1) ? false : true;
+    
+    $scope.getArrow = function (path) {
         if ($location.path().substr(0, path.length) === path) {
             return true;
         }
     }
 
-
 });
+
+ImgVisionApp.controller('autoCompletePopupController', function ($scope) {
+    $scope.from = ($scope.currentPage - 1) * 8;
+    $scope.toInim = ($scope.currentPage) * 8;
+    $scope.to = $scope.toInim > $scope.matches.length ? $scope.matches.length : $scope.toInim;
+});
+
 
 ImgVisionApp.constant('datepickerPopupConfig', {
     datepickerPopup: "MMM d, yyyy",

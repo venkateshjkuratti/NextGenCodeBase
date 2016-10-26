@@ -1,7 +1,8 @@
 ImgVisionApp.controller('ModalInstanceViewNotesController', function ($rootScope, $scope, $uibModalInstance, $location, $http, $routeParams, urlConstants, userDetailsServices, commonServices, retrievalResultsServices, adminServices, docId, items) {
 
     $scope.isloading = true;
-    $scope.isRetrievalWorkflow = $location.path() == '/retrieval'
+    $scope.isAddFormSubmitted = false;
+    $scope.isRetrievalWorkflow = ($location.path() == '/retrieval' || $location.path().indexOf("003") != -1);
     userDetailsServices.getUserSystemId().then(function (response) {
 
         var viewnotesUrl = '';
@@ -43,7 +44,10 @@ ImgVisionApp.controller('ModalInstanceViewNotesController', function ($rootScope
 
 
     $scope.cancel = function () {
-        $uibModalInstance.close($scope.isDataAvailable);
+        var data = {}
+        data.isSuccess = $scope.isDataAvailable;
+        data.isSubmitted = $scope.isAddFormSubmitted;
+        $uibModalInstance.close(data);
         $uibModalInstance.dismiss('cancel');
     };
 
@@ -59,9 +63,9 @@ ImgVisionApp.controller('ModalInstanceViewNotesController', function ($rootScope
 
     $scope.ok = function (data) {
 
-
         userDetailsServices.getUserSystemId().then(function (response) {
-            var instanceId = items;
+            var instanceId;
+            instanceId = items;
             var addNotesURL = urlConstants.addNotes;
             addNotesFinalURL = addNotesURL + $rootScope.userDetails.UserName + '/' + response + '/' + instanceId;
             var postObj = new Object();
@@ -103,10 +107,12 @@ ImgVisionApp.controller('ModalInstanceViewNotesController', function ($rootScope
                 });
 
                 commonServices.setNotifyMessage("Notes added.");
+                $scope.isAddFormSubmitted = true;
             }).error(function (response) {
                 var errorMsg = (response && response.Message) ? ' Error: ' + response.Message : '';
                 commonServices.setNotifyMessage("Error in adding notes." + errorMsg);
                 $uibModalInstance.dismiss('cancel');
+                $scope.isAddFormSubmitted = false;
             });
         });
 

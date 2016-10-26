@@ -3,6 +3,6 @@
         <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
     </div>
     <ul class="main-list" ng-show="isSelectResultsAvailable">
-        <li class="field {{r.ControlName | lowercase}}" search-field-box-templates ng-repeat="r in indexingFields" search-field-box-templates-object="r.ValueAsString" search-field-box-templates-label="r.DisplayName | translate" search-field-box-templates-type="r.ControlName" search-field-box-templates-selects="r.ComboValues" search-field-box-required="r.IsMandatory" search-field-box-module="upload"  search-field-box-templates-format="r.FieldDateFormat.DefaultFormat" search-field-box-templates-check="r.ValueAsString" search-field-box-templates-select="r.ValueAsString"></li>
+        <li class="field {{r.ControlName | lowercase}}" search-field-box-templates ng-repeat="r in indexingFields" search-field-box-templates-object="r.ValueAsString" search-field-box-templates-label="r.DisplayName | translate" search-field-box-templates-type="r.ControlName" search-field-box-templates-selects="r.ComboValues" search-field-box-required="r.IsMandatory" search-field-box-module="upload"  search-field-box-templates-format="r.FieldDateFormat.DefaultFormat" search-field-box-templates-check="r.ValueAsString" search-field-box-templates-select="r.ValueAsString" search-field-box-templates-combo="r.ComboValues"></li>
     </ul>
 </div>

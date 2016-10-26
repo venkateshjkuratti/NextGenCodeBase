@@ -7,7 +7,7 @@
         <select class="select" ng-required="true" ng-show="!isBusinessAreaLoaded" ng-model="searchFieldText" ng-change="selectFields(searchFieldText)" ng-options="i.Id as i.Name | translate for i in searchFieldOptions">
            <option disabled value="">{{'Select a Business Area' | translate}}</option>
         </select>
-        <div ng-if="showSearchOptions">
+        <div ng-if="showSearchOptions" class="retrieval-select-fields-wrapper">
         <div class="retrieval-select-fields">
             <div class="loader" ng-show="isSelectResultsLoading">
                 <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
