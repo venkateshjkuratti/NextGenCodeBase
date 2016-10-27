@@ -1,4 +1,4 @@
-ImgVisionApp.controller('adminController', function ($scope, $rootScope, $http, $timeout, $window, $uibModal,  urlConstants, adminServices, userDetailsServices, commonServices) {
+ImgVisionApp.controller('adminController', function ($scope, $rootScope, $http, $timeout, $window, $uibModal, urlConstants, adminServices, userDetailsServices, commonServices) {
 
     var adminWorkFlow;
     var adminQueueDetailsUrl;
@@ -19,7 +19,7 @@ ImgVisionApp.controller('adminController', function ($scope, $rootScope, $http, 
     var processActivityID;
     var systemId;
     var selectedAdminWorkFlowQueue;
-    
+
     $scope.isTableVisible = false;
     $scope.isAdminTreeLoading = true;
     $scope.workStatusCount = null;
@@ -40,7 +40,7 @@ ImgVisionApp.controller('adminController', function ($scope, $rootScope, $http, 
     $scope.isApiCallsSuccess = false;
     $scope.fullname = false;
     $scope.gpid = false;
-    
+
     $scope.adminEmitter = {
         alter: 'alter',
         reAssign: 're-assign',
@@ -198,7 +198,7 @@ ImgVisionApp.controller('adminController', function ($scope, $rootScope, $http, 
             }
             getAdminGridColumnOrder(WorkflowId, id);
             adminServices.setAdminQueueWorkItemsDetails(response);
-            localStorage.setItem('getAdminQueueWorkItemsDetails', JSON.stringify(response));  
+            localStorage.setItem('getAdminQueueWorkItemsDetails', JSON.stringify(response));
 
             var width;
             $timeout(function () {
@@ -222,8 +222,6 @@ ImgVisionApp.controller('adminController', function ($scope, $rootScope, $http, 
         $scope.isWorkStatusActive = true;
         adminServices.setCurrentAdminQueueWorkItemDetails(adminQueueWorkItemsUrl + '/' + WorkflowId + '/' + id + '/' + true);
 
-
-
     }
 
     $scope.getTableColumnWidth = function () {
@@ -231,7 +229,7 @@ ImgVisionApp.controller('adminController', function ($scope, $rootScope, $http, 
             tableColumnWidth();
         }, 100);
     }
-    
+
     function tableColumnWidth() {
         $('.admin-wrapper table th').each(function (index) {
             width = $('.admin-wrapper table th:eq(' + index + ')').find('.text').width();
@@ -244,7 +242,7 @@ ImgVisionApp.controller('adminController', function ($scope, $rootScope, $http, 
         });
     }
 
-    
+
     function getAdminGridColumnOrder() {
         $http.get(adminQueueDetailsUrl + '/' + workflowID + '/' + queueID).success(function (response) {
             //getting the work status counts
@@ -270,9 +268,14 @@ ImgVisionApp.controller('adminController', function ($scope, $rootScope, $http, 
         if (item.selected) {
             item.selected = false;
             $scope.selectedRows.splice($scope.selectedRows.indexOf(item), 1);
+            if($scope.selectedRows.length==1){
+                adminServices.setStorageRepoId($scope.selectedRows[0].StorageRepositoryId);
+            }
+                        
         } else {
             item.selected = true;
             $scope.selectedRows.push(item);
+            adminServices.setStorageRepoId(item.StorageRepositoryId);
         }
         setMenuStatus($scope.selectedRows.length);
     }
@@ -318,6 +321,8 @@ ImgVisionApp.controller('adminController', function ($scope, $rootScope, $http, 
                 }
             }
         });
+        
+        
 
         modalInstance.result.then(function (response) {
             if (response.isSuccess && response.isSubmitted) {

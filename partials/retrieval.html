@@ -3,7 +3,7 @@
         <ul class="lists">
             <li><a href="javascript:" a-disabled="isExportTabsDisabled()" ng-click="exportToExcel()"><img ng-src="assets/images/excel{{isExportTabsDisabled()?'-inactive':''}}.png"/>{{'Export to Excel' | translate}}</a></li>
             <li><a href="javascript:" a-disabled="isAdminTabsDisabled()" ng-click="showAddPageModal()"><img ng-src="assets/images/add{{isAdminTabsDisabled()?'-inactive':''}}.png"/>{{'Add Pages' | translate}}</a></li>
-            <li><a href="#/upload?copyDoc={{documentID}}" a-disabled="isAdminTabsDisabled()"><img ng-src="assets/images/copy-page{{isAdminTabsDisabled()?'-inactive':''}}.png"/>{{'Copy Document' | translate}}</a></li>
+            <li><a href="javascript:" a-disabled="isAdminTabsDisabled()" ng-click="showCopyDocument()"><img ng-src="assets/images/copy-page{{isAdminTabsDisabled()?'-inactive':''}}.png"/>{{'Copy Document' | translate}}</a></li>
             <li><a href="javascript:" a-disabled="isAdminTabsDisabled()" ng-click="showEmailModal()"><img ng-src="assets/images/mail{{isAdminTabsDisabled()?'-inactive':''}}.png"/>{{'Email' | translate}}</a></li>
             <li><a href="javascript:" a-disabled="isAdminTabsDisabled()" copy-to-clipboard="{{link}}" ng-click="copyLink()"><img ng-src="assets/images/link{{isAdminTabsDisabled()?'-inactive':''}}.png"/>{{'Link' | translate}}</a></li>
             <li><a href="javascript:" a-disabled="isAdminTabsDisabled()" ng-click="showViewHistory()"><img ng-src="assets/images/view-work-his{{isAdminTabsDisabled()?'-inactive':''}}.png"/>{{'View Workflow History' | translate}}</a></li>

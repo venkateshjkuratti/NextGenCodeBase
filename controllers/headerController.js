@@ -1,4 +1,4 @@
-ImgVisionApp.controller('headerController', function ($scope, $rootScope, $window, $location, $http, $log, $uibModal, $translate, urlConstants, userDetailsServices, commonServices) {
+ImgVisionApp.controller('headerController', function ($scope, $rootScope, $window, $location, $http, $log, $uibModal, $translate, urlConstants, userDetailsServices, commonServices, tmhDynamicLocale, $locale) {
     /*Sign out functionality --- START*/
     var IDLE_TIMEOUT = 20; //seconds
     var _idleSecondsCounter = 0;
@@ -70,6 +70,9 @@ ImgVisionApp.controller('headerController', function ($scope, $rootScope, $windo
     $scope.ishomeLoader = function () {
         return userDetailsServices.getLoader();
     }
+
+    $scope.isRussianSelected = false;
+
     userDetailsServices.getUserDetails().then(function (response) {
 
         $scope.userSystemInfo = userDetailsServices.details();
@@ -104,6 +107,16 @@ ImgVisionApp.controller('headerController', function ($scope, $rootScope, $windo
 
                 $translate.use(systemData.systemLanguage);
 
+
+                //applying Russian localisation for dates and currency
+                if (systemData.systemLanguage === 'ru') {
+                    tmhDynamicLocale.set('ru');
+                    $rootScope.locale = $locale;
+                } else {
+                    tmhDynamicLocale.set('en');
+                    $rootScope.locale = $locale;
+                }
+
                 $http.get('https://nextgendigitalimagingapitest.corp.pep.pvt/api/UserSecurity/RegisterPrincipal/' + $scope.userSystemInfo.UserGpid + '/' + systemData.systemId).success(function (response) {
 
                     $rootScope.userDetails = response;
@@ -137,13 +150,6 @@ ImgVisionApp.controller('headerController', function ($scope, $rootScope, $windo
 
 
     });
-
-
-    $scope.toogleLang = function () {
-        console.log($translate.use());
-        $translate.use() === 'en' ? $translate.use('ru') : $translate.use('en');
-
-    }
 
     $scope.showUserPreferences = function () {
         var modalInstance = $uibModal.open({

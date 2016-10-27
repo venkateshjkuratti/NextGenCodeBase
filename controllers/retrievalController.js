@@ -2,20 +2,21 @@ ImgVisionApp.controller('retrievalController', function ($rootScope, $scope, $ht
     $scope.isloading = true;
     $scope.error = false;
     $scope.createDocumentLists = [{
-        'heading':'Search Criteria',
-        'templatePath':'partials/RetrievalBusinessArea.html',
-        'iconImg':'assets/images/search-chiteria.png',
+        'heading': 'Search Criteria',
+        'templatePath': 'partials/RetrievalBusinessArea.html',
+        'iconImg': 'assets/images/search-chiteria.png',
         'status': 'enabled'
-    },{
-        'heading':'Search Results',
-        'templatePath':'partials/RetrievalIndexingFields.html',
-        'iconImg':'assets/images/search-result.png',
+    }, {
+        'heading': 'Search Results',
+        'templatePath': 'partials/RetrievalIndexingFields.html',
+        'iconImg': 'assets/images/search-result.png',
         'status': 'disabled'
     }];
     $scope.documentID = retrievalResultsServices.getDocId();
     $scope.documentType = retrievalResultsServices.getRetrievalTabActive();
     retrievalResultsServices.setAdminTabsDisabled(true);
     retrievalResultsServices.setExportTabsDisabled(true);
+
     function setadminContentLeftHeight() {
         $('.content-left, .content-right').height($(window).height() - 99);
     }
@@ -32,7 +33,7 @@ ImgVisionApp.controller('retrievalController', function ($rootScope, $scope, $ht
         $('.content-left').toggleClass('swap-content-left');
         $('.content-right').toggleClass('adjust-content-right');
     }
-    
+
     $scope.$watch(function () {
         return adminServices.getAccordionDisabledForRetrieval()
     }, function (newValue, oldValue) {
@@ -42,7 +43,7 @@ ImgVisionApp.controller('retrievalController', function ($rootScope, $scope, $ht
             });
         }
     });
-    
+
     $scope.$watch(function () {
         return retrievalResultsServices.getRetrievalTabActive();
     }, function (newValue, oldValue) {
@@ -90,9 +91,9 @@ ImgVisionApp.controller('retrievalController', function ($rootScope, $scope, $ht
         });
 
     };
-    $scope.copyLink = function(){
-            $scope.link = retrievalResultsServices.getLink();
-            commonServices.setNotifyMessage("Link is copied.");
+    $scope.copyLink = function () {
+        $scope.link = retrievalResultsServices.getLink();
+        commonServices.setNotifyMessage("Link is copied.");
     }
     $scope.showViewHistory = function () {
 
@@ -123,8 +124,8 @@ ImgVisionApp.controller('retrievalController', function ($rootScope, $scope, $ht
                 items: function () {
                     return retrievalResultsServices.getInstanceId();
                 },
-                docId: function(){
-                   return retrievalResultsServices.getDocId();  
+                docId: function () {
+                    return retrievalResultsServices.getDocId();
                 }
             }
         });
@@ -136,33 +137,33 @@ ImgVisionApp.controller('retrievalController', function ($rootScope, $scope, $ht
         });
 
     };
-    
-     $scope.showDocumentNotesAdmin = function () {
-       
+
+    $scope.showDocumentNotesAdmin = function () {
+
         var modalInstance = $uibModal.open({
             animation: $scope.animationsEnabled,
             templateUrl: 'partials/DocumentNotes.html',
             controller: 'ModalInstanceDocumentNotesController',
-           resolve: {
+            resolve: {
                 items: function () {
-                     return retrievalResultsServices.getInstanceId();
+                    return retrievalResultsServices.getInstanceId();
                 },
-                docId: function(){
-                   return retrievalResultsServices.getDocId();  
+                docId: function () {
+                    return retrievalResultsServices.getDocId();
                 }
             }
         });
-        
-      modalInstance.result.then(function (selectedItem) {
+
+        modalInstance.result.then(function (selectedItem) {
             $scope.selected = selectedItem;
         }, function () {
             $log.info('Modal dismissed at: ' + new Date());
         });
-        
+
 
     };
 
-      $scope.exportToExcel = function(){
+    $scope.exportToExcel = function () {
 
         var modalInstance = $uibModal.open({
             animation: $scope.animationsEnabled,
@@ -180,7 +181,24 @@ ImgVisionApp.controller('retrievalController', function ($rootScope, $scope, $ht
 
         }, function () {
             $log.info('Modal dismissed at: ' + new Date());
-        });             
+        });
     }
+
+
+    $scope.showCopyDocument = function () {
+
+        var modalInstance = $uibModal.open({
+            animation: $scope.animationsEnabled,
+            templateUrl: "partials/viewWebUpload.html",
+            controller: function ($scope, $uibModalInstance) {
+                $scope.cancel = function () {
+                    $uibModalInstance.dismiss('cancel');
+                };
+            }
+        });
+
+    }
+
+
 
 });

@@ -158,8 +158,7 @@ ImgVisionApp.directive('searchFieldBoxTemplates', function (uploadServices) {
             searchFieldBoxTemplatesFormat: "=",
             searchFieldBoxTemplatesPermission: "=",
             searchFieldBoxRequired: "=",
-            searchFieldBoxModule: "@",
-            searchFieldBoxTemplatesCombo: "="
+            searchFieldBoxModule: "@"
         },
         link: function (scope, el, attrs) {
 
@@ -209,11 +208,10 @@ ImgVisionApp.directive('searchFieldBoxTemplates', function (uploadServices) {
 
             if (scope.toLowercase(scope.searchFieldBoxTemplatesType) == scope.controlTypeEmitters.autoComp) {
                 scope.comboValues = [];
-                angular.forEach(scope.searchFieldBoxTemplatesCombo, function (obj) {
+                angular.forEach(scope.searchFieldBoxTemplatesSelects, function (obj) {
                     scope.comboValues.push(obj.ComboValue);
 
                 });
-                console.log(scope.comboValues);
             }
 
         },
@@ -222,8 +220,8 @@ ImgVisionApp.directive('searchFieldBoxTemplates', function (uploadServices) {
             this.inputDate = function (val) {
                 $scope.searchFieldBoxTemplatesObject = val;
             }
-            
-            
+
+
 
         }
     }

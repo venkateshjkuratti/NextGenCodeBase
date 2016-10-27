@@ -1,0 +1,9 @@
+<div modal-element="upload">
+    <div class="modal-header main-labels-static">
+        <h5 class="modal-title left">{{'Web Upload' | translate}}</h5>
+        <div class="close right" ng-click="cancel()"><i class="fa fa-times" aria-hidden="true"></i></div>
+    </div>
+    <div class="modal-body" ng-controller="webUploadController">
+        <div ng-include src="'partials/upload.html'"></div>
+    </div>
+</div>

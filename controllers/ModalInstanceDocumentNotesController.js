@@ -97,7 +97,7 @@ ImgVisionApp.controller('ModalInstanceDocumentNotesController', function ($rootS
             var viewnotesUrl = '';
             var currModalURL= urlConstants.viewDocumentNotes;
             var instanceId = docId;
-            var fileNetId = ($location.path() == '/retrieval')?retrievalResultsServices.getFileNetId():( $location.path().indexOf("workItemView")>-1)?$routeParams.storageRepoId.split("_")[1]:adminServices.getStorageRepoId();
+            var fileNetId = ($location.path() == '/retrieval')?retrievalResultsServices.getFileNetId():( $location.path().indexOf("documentViewer")>-1)?$routeParams.storageRepoId.split("_")[1]:adminServices.getStorageRepoId();
             viewnotesUrl =  currModalURL + $rootScope.userDetails.UserName + '/'+response +'/'+instanceId;
             $http.get(viewnotesUrl).success(function (response) {            
                 angular.element(".instanceId").text(instanceId);

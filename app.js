@@ -1,6 +1,6 @@
-var ImgVisionApp = angular.module('imgVisionApp', ['ngRoute', 'ngAnimate', 'ui.bootstrap', 'ngResource', 'ngCookies', 'ngTableResize', 'pascalprecht.translate']);
+var ImgVisionApp = angular.module('imgVisionApp', ['ngRoute', 'ngAnimate', 'ui.bootstrap', 'ngResource', 'ngCookies', 'ngTableResize', 'pascalprecht.translate', 'tmh.dynamicLocale']);
 
-ImgVisionApp.config(function ($routeProvider, $httpProvider, $locationProvider, $translateProvider, $provide) {
+ImgVisionApp.config(function ($routeProvider, $httpProvider, $locationProvider, $translateProvider, $provide, tmhDynamicLocaleProvider) {
 
     $httpProvider.defaults.useXDomain = true;
     $httpProvider.defaults.withCredentials = false;
@@ -39,9 +39,11 @@ ImgVisionApp.config(function ($routeProvider, $httpProvider, $locationProvider, 
             templateUrl: "TrafficCop/trafficcop.html",
             controller: "trafficcopController"
         }).when("/trafficcopViewer/:docTypeId/:docId/:docTypeName/:instanceId/:storageRepoId/:type", {
-            templateUrl: "partials/documentViewer.html",
-            controller: "myWorkItemViewController"    
+            templateUrl: "TrafficCop/TrafficCopViewer/trafficcopViewer.html",
+            controller: "myWorkItemViewController"     
         }).otherwise('/home');
+    
+    tmhDynamicLocaleProvider.localeLocationPattern('bower-components/angular-locale_{{locale}}.js');
 
 });
 
@@ -58,6 +60,7 @@ function Decorate($provide) {
         return $delegate;
     });
 }
+
 
 
 ImgVisionApp.run(function ($rootScope, $location, $window) {

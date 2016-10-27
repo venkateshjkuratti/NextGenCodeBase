@@ -1527,6 +1527,7 @@ label.disable {
 .content .content-desp .retrievalResults table th{color: #FFFFFF;background-color: #002c5f;text-align: left;padding-right: 0; width: 230px; border-right: 1px solid #fff;}
 .modal-body th{color: #FFFFFF;background-color: #002c5f;text-align: left;padding-right: 0; border-right: 1px solid #fff;}
 .notes .modal-content,.history .modal-content{width: 85%;}
+.notes .modal-content,.upload .modal-content{width: 85%;}
 .content .content-desp .retrievalResults table td{text-align: left;word-wrap: break-word;}
 .content .content-desp .retrievalResults table th,.content .content-desp .retrievalResults table td{overflow: hidden;text-overflow: ellipsis;}
 .retrieval-select-fields .input-group{display:inline-block;height: 32px;width: 100%;}
