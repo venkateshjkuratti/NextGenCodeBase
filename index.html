@@ -67,6 +67,8 @@
     <script src="controllers/dashboardController.js"></script>
     <script src="controllers/datePickerController.js"></script>
     <script src="controllers/viewerController.js"></script>
+    <script src="TrafficCop/trafficcopController.js"></script>
+    <script src="TrafficCop/trafficcopService.js"></script>
     <script src="services/uploadServices.js"></script>
     <link rel="stylesheet" href="bower-components/bootstrap.css" />
     <link rel="stylesheet" href="bower-components/bootstrap-theme.min.css" />
@@ -134,6 +136,7 @@
                     <a href="#/upload" class="menu" ng-class="getClass('/upload')">{{ 'Web Upload' | translate  }}<span ng-class="{ 'arrow': getArrow('/upload') }"></span></a>
                     <a href="#/reports" class="menu" ng-class="getClass('/reports')">{{ 'Reports' | translate  }}<span ng-class="{ 'arrow': getArrow('/reports') }"></span></a>
                     <a href="#/dashboard" class="menu" ng-class="getClass('/dashboard')">{{ 'Dashboard' | translate  }} <span ng-class="{ 'arrow': getArrow('/dashboard') }"></span></a>
+                    <a href="#/trafficcop" class="menu" ng-class="getClass('/trafficcop')">{{ 'TrafficCop' | translate  }} <span ng-class="{ 'arrow': getArrow('/trafficcop') }"></span></a>
                 </div>
                 <div class="content-box" ng-view>
 

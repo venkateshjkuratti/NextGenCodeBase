@@ -35,6 +35,12 @@ ImgVisionApp.config(function ($routeProvider, $httpProvider, $locationProvider, 
         }).when("/dashboard", {
             templateUrl: "partials/dashboard.html",
             controller: "dashboardController"
+        }).when("/trafficcop", {
+            templateUrl: "TrafficCop/trafficcop.html",
+            controller: "trafficcopController"
+        }).when("/trafficcopViewer/:docTypeId/:docId/:docTypeName/:instanceId/:storageRepoId/:type", {
+            templateUrl: "partials/documentViewer.html",
+            controller: "myWorkItemViewController"    
         }).otherwise('/home');
 
 });

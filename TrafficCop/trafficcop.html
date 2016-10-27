@@ -72,7 +72,7 @@
                     </thead>
                     <tbody>
                         <tr class="rows dnd-moved" ng-repeat="item in myWorkItemBasketDetails | orderBy:sort |  filter:listItems | limitInstances:from:to" ng-click="setInstances(item);" ng-class="{'active':item.selected}">
-                            <td><a href="#/workItemView/{{item.DocumentType}}/{{item.InstanceId}}/{{item.StorageRepositoryId}}/002" target="_blank">{{item.InstanceId | translate}}</a></td>
+                            <td><a href="#/trafficcopViewer/{{item.DocumentTypeId}}/{{item.DocumentId}}/{{item.DocumentType}}/{{item.InstanceId}}/{{item.StorageRepositoryId}}/002" target="_blank">{{item.InstanceId | translate}}</a></td>
                             <td>{{item.Title | translate}}</td>
                             <td>{{item.CreateDateAsString | translate}}</td>
                             <td>{{item.Aging | translate}}</td>
