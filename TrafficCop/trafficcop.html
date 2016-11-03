@@ -1,22 +1,75 @@
-<div class="dashboard-container" style= "width:100%;">
+<div class="admin-wrapper" >
+    <div class="main-labels-static left">
+        <ul class="lists">
+            <li>
+                <a href="javascript:" ng-click="refreshWorkItem()" a-disabled="!isWorkItems"><img src="assets/images/refresh{{!isWorkItems?'-inactive':''}}.png" />{{'Refresh' | translate}}</a>
+            </li>
+            <li>
+                <a href="javascript:" a-disabled="!isOneRowSelected" ng-click="assignReleaseWorkItem('RELEASE')"><img src="assets/images/release{{!isOneRowSelected?'-inactive':''}}.png" />{{'Release' | translate}}</a>
+            </li>
+            <li>
+                <a href="javascript:" a-disabled="!isDeleteEnabled" ng-click="deleteWorkItem()"><img src="assets/images/delete-nav{{!isDeleteEnabled?'-inactive':''}}.png" />{{'Recycle' | translate}}</a>
+            </li>
+        </ul>
+    </div>
     <div class="content">
         <div class="head-wrapper"> <!--ng-show="isDataAvailable"-->
-        <div class="left">
-                <h4>{{ 'My Traffic Jam' | translate}}</h4>
-        </div>
         <div class="right">
             <div class="search-field">
                 <input ng-model="listItems" name="listItems" placeholder="Search or filter by any field">
                 <i class="fa fa-search" aria-hidden="true"></i>
             </div>
         </div>
-
+        </div>
+        <div class="display-text left m10" ng-show="workFlowNil">
+            <h5>{{'No workflows available' | translate}}</h5>
+        </div>
         <div class="content-desp">
-            <div class="alert alert-danger" ng-show="error">{{'Data not available' | translate}}</div>
-            <div class="loader" ng-show="isloading">
-                <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
+            <div class="content-left left" style="width:20%;">
+               <div class="content-left-bar right"  ng-click="hideContentLeftPanel()"></div> <!--ng-show="isTableVisible" -->
+                <div class="loader" ng-show="isAdminTreeLoading">
+                    <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
+                </div>
+                <div class="admin-tree" > <!--ng-class=" {active:isWorkStatusActive}"-->
+                    <div class="box">
+                        <ul class="parent">
+                            <li class="queues">
+                                <div class="queue-head-wrapper" style="height:40px"; ng-click="isCount = !isCount">
+                                    <div class="right icon" ng-class="{show:isCount}">
+                                        <img src="assets/images/workflow-collapse.png" ng-if="isCount" />
+                                        <img src="assets/images/workflow-expand.png" ng-if="!isCount" />
+                                    </div>                                   
+                                    {{'Traffic Cop' | translate}}
+                                </div>
+                                <ul class="child hide" ng-class="{show:isCount}">
+                                    <li>
+                                        <a href="javascript:" ng-click="getworkitems()" ng-class="{active:isTrafficQueueSelected}" a-disabled="isICountNull(Count)">
+                                           {{'Traffic Cop' | translate}} <span>({{totalItems}})</span>
+                                            </a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:" ng-click="getAdminQueueWorkItemsDetails(WorkflowId, ID, TotalCount, Active, Suspended,Assigned,Unassigned)" ng-class="{active:isQueuesSet(ID)}" a-disabled="isICountNull(Count)">
+                                            {{'Recycle' | translate}} <span>({{totalItems}})</span>
+                                            </a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div> 
             </div>
-            <div class="imgv-workitem-basket table-responsive clear"> <!--ng-show="isDataAvailable"-->
+            <div class="content-right right" style="width:78%";>
+
+                <div class="loader" ng-show="isloading">
+                    <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
+                </div>
+                <div class="admin-content-right-left left full-width">
+
+                    <div class="alert alert-danger admin left" ng-show="error && !isloading">{{'Data not available' | translate}}</div>
+                    <div class="alert alert-danger admin left" ng-show="showWorkItemStatusMessage">{{workItemStatusMessage | translate}}<i class="fa fa-close right" aria-hidden="true" ng-click="showWorkItemStatusMessage=false"></i></div>
+                    <div class="alert alert-success admin left" ng-show="isApiCallsSuccess">{{adminEmitter.apiCallSuccess | translate}}<i class="fa fa-close right" aria-hidden="true" ng-click="isApiCallsSuccess=false"></i></div>
+                </div>
+                <div class="imgv-workitem-basket table-responsive clear" ng-show="isDataAvailable" > 
                 <table class="table mdl-data-table mdl-js-data-table mdl-shadow--1dp">
                     <thead>
                         <tr class="dnd-moved">
@@ -26,10 +79,10 @@
                                     <i ng-click="sortItems('-InstanceId','InstanceIdDesc')" class="fa fa-sort-desc" aria-hidden="true" ng-class="{active:isSetOrder('InstanceIdDesc')}"></i>
                                 </div>
                             </th>
-                            <th>{{'Workitem Title' | translate}}
+                            <th>{{'Storage ID' | translate}}
                                 <div class="sort">
-                                    <i ng-click="sortItems('Title','TitleAsc')" class="fa fa-sort-asc" aria-hidden="true" ng-class="{active:isSetOrder('TitleAsc')}"></i>
-                                    <i ng-click="sortItems('-Title','TitleDesc')" class="fa fa-sort-desc" aria-hidden="true" ng-class="{active:isSetOrder('TitleDesc')}"></i>
+                                    <i ng-click="sortItems('StorageId','StorageIdAsc')" class="fa fa-sort-asc" aria-hidden="true" ng-class="{active:isSetOrder('StorageIdAsc')}"></i>
+                                    <i ng-click="sortItems('-StorageId','StorageIdDesc')" class="fa fa-sort-desc" aria-hidden="true" ng-class="{active:isSetOrder('StorageIdDesc')}"></i>
                                 </div>
                             </th>
                             <th>{{'Create Date' | translate}}
@@ -38,34 +91,22 @@
                                     <i ng-click="sortItems('-CreateDateAsString','CreateDateAsStringDesc')" class="fa fa-sort-desc" aria-hidden="true" ng-class="{active:isSetOrder('CreateDateAsStringDesc')}"></i>
                                 </div>
                             </th>
-                            <th>{{'Aging Stats (in days)' | translate}}
+                            <th>{{'Assigned User' | translate}}
                                 <div class="sort">
-                                    <i ng-click="sortItems('Aging','AgingAsc')" class="fa fa-sort-asc" aria-hidden="true" ng-class="{active:isSetOrder('AgingAsc')}"></i>
-                                    <i ng-click="sortItems('-Aging','AgingDesc')" class="fa fa-sort-desc" aria-hidden="true" ng-class="{active:isSetOrder('AgingDesc')}"></i>
+                                    <i ng-click="sortItems('AssignedUser','AssignedUserAsc')" class="fa fa-sort-asc" aria-hidden="true" ng-class="{active:isSetOrder('AssignedUserAsc')}"></i>
+                                    <i ng-click="sortItems('-AssignedUser','AssignedUserDesc')" class="fa fa-sort-desc" aria-hidden="true" ng-class="{active:isSetOrder('AssignedUserDesc')}"></i>
                                 </div>
                             </th>
-                            <th>{{'Document Type' | translate}}
+                            <th>{{'Reference Type' | translate}}
                                 <div class="sort">
-                                    <i ng-click="sortItems('DocumentType','DocumentTypeAsc')" class="fa fa-sort-asc" aria-hidden="true" ng-class="{active:isSetOrder('DocumentTypeAsc')}"></i>
-                                    <i ng-click="sortItems('-DocumentType','DocumentTypeDesc')" class="fa fa-sort-desc" aria-hidden="true" ng-class="{active:isSetOrder('DocumentTypeDesc')}"></i>
+                                    <i ng-click="sortItems('ReferenceType','ReferenceTypeAsc')" class="fa fa-sort-asc" aria-hidden="true" ng-class="{active:isSetOrder('ReferenceTypeAsc')}"></i>
+                                    <i ng-click="sortItems('-ReferenceType','ReferenceTypeDesc')" class="fa fa-sort-desc" aria-hidden="true" ng-class="{active:isSetOrder('ReferenceTypeDesc')}"></i>
                                 </div>
                             </th>
-                            <th>{{'Queue' | translate}}
+                            <th>{{'Workitem Title' | translate}}
                                 <div class="sort">
-                                    <i ng-click="sortItems('WorkflowQueueName','asc')" class="fa fa-sort-asc" aria-hidden="true" ng-class="{active:isSetOrder('asc')}"></i>
-                                    <i ng-click="sortItems('-WorkflowQueueName','desc')" class="fa fa-sort-desc" aria-hidden="true" ng-class="{active:isSetOrder('desc')}"></i>
-                                </div>
-                            </th>
-                            <th>{{'Workflow' | translate}}
-                                <div class="sort">
-                                    <i ng-click="sortItems('WorkflowName','WorkflowNameAsc')" class="fa fa-sort-asc" aria-hidden="true" ng-class="{active:isSetOrder('WorkflowNameAsc')}"></i>
-                                    <i ng-click="sortItems('-WorkflowName','WorkflowNameDesc')" class="fa fa-sort-desc" aria-hidden="true" ng-class="{active:isSetOrder('WorkflowNameDesc')}"></i>
-                                </div>
-                            </th>
-                            <th>{{'Status' | translate}}
-                                <div class="sort">
-                                    <i ng-click="sortItems('StatusAsString','StatusAsStringAsc')" class="fa fa-sort-asc" aria-hidden="true" ng-class="{active:isSetOrder('StatusAsStringAsc')}"></i>
-                                    <i ng-click="sortItems('-StatusAsString','StatusAsStringDesc')" class="fa fa-sort-desc" aria-hidden="true" ng-class="{active:isSetOrder('StatusAsStringDesc')}"></i>
+                                    <i ng-click="sortItems('Title','TitleAsc')" class="fa fa-sort-asc" aria-hidden="true" ng-class="{active:isSetOrder('TitleAsc')}"></i>
+                                    <i ng-click="sortItems('-Title','TitleDesc')" class="fa fa-sort-desc" aria-hidden="true" ng-class="{active:isSetOrder('TitleDesc')}"></i>
                                 </div>
                             </th>
                         </tr>
@@ -73,18 +114,19 @@
                     <tbody>
                         <tr class="rows dnd-moved" ng-repeat="item in myWorkItemBasketDetails | orderBy:sort |  filter:listItems | limitInstances:from:to" ng-click="setInstances(item);" ng-class="{'active':item.selected}">
                             <td><a href="#/trafficcopViewer/{{item.DocumentTypeId}}/{{item.DocumentId}}/{{item.DocumentType}}/{{item.InstanceId}}/{{item.StorageRepositoryId}}/002" target="_blank">{{item.InstanceId | translate}}</a></td>
-                            <td>{{item.Title | translate}}</td>
+                            <td>{{item.DocumentType | translate}}</td>
                             <td>{{item.CreateDateAsString | translate}}</td>
                             <td>{{item.Aging | translate}}</td>
-                            <td>{{item.DocumentType | translate}}</td>
-                            <td>{{item.QueueName | translate}}</td>
-                            <td>{{item.WorkflowName | translate}}</td>
-                            <td>{{item.StatusAsString | translate}}</td>
+                             <td>{{item.DocumentType | translate}}</td>
+                            <td>{{item.Title | translate}}</td>
                         </tr>
                     </tbody>
                 </table>
+            </div>
             </div>
 
         </div>
     </div>
 </div>
+
+ 

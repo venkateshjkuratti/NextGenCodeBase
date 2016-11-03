@@ -31,7 +31,7 @@ ImgVisionApp.config(function ($routeProvider, $httpProvider, $locationProvider, 
             controller: "webUploadController"
         }).when("/reports", {
             templateUrl: "partials/reports.html",
-            controller: ""
+            controller: "reportsController"
         }).when("/dashboard", {
             templateUrl: "partials/dashboard.html",
             controller: "dashboardController"

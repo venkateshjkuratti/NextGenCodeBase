@@ -1,5 +1,5 @@
 
-ImgVisionApp.controller('trafficcopController', function($scope, trafficcopService,$http){
+ImgVisionApp.controller('trafficcopController', function($scope, trafficcopService,$http,$timeout){
     
 
  $scope.error = false;
@@ -8,7 +8,7 @@ ImgVisionApp.controller('trafficcopController', function($scope, trafficcopServi
 
     $scope.currentPage = 1;
     $scope.itemsPerPage = 10;
-    
+    $scope.isCount = false;
     $scope.itemListOption = [10,20, 50, 100];
     $scope.itemsPerPageOnSelect = $scope.itemListOption[0];
     
@@ -36,6 +36,7 @@ ImgVisionApp.controller('trafficcopController', function($scope, trafficcopServi
                 } else {
                     $scope.error = false;
                     $scope.isDataAvailable = true;
+                    $scope.isCount = true;
                 }
            // }, 1000);
 
@@ -46,7 +47,32 @@ ImgVisionApp.controller('trafficcopController', function($scope, trafficcopServi
             $scope.isDataAvailable = false;
         });
     
-    
+    $scope.getworkitems = function (){
+        $scope.isloading = true;
+        $scope.isDataAvailable = false;
+        $scope.isTrafficQueueSelected = true;
+        $scope.isrecyclequeueSelected = false;
+       
+
+       $timeout(function(){ 
+           $scope.myWorkItemBasketDetails = trafficcopService.myData();
+                $scope.totalItems = $scope.myWorkItemBasketDetails.length;
+                
+                if ($scope.totalItems == 0) {
+                    $scope.error = true;
+                    $scope.isDataAvailable = false;
+                } else {
+                    $scope.error = false;
+                    $scope.isDataAvailable = true;
+                    $scope.isCount = true;
+                }
+        
+        $scope.isloading = false;
+
+        },500);
+    }
+
+
     $scope.setInstances = function (item) {
         //item.StorageRepositoryId,item.InstanceId, item.DocumentId, item.StatusAsString, item.OwningUserFullName
         if (item.selected) {

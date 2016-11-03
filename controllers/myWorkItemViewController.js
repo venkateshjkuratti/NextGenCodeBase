@@ -11,7 +11,7 @@ ImgVisionApp.controller('myWorkItemViewController', function ($rootScope, $scope
     var docTypeName = $routeParams.docTypeName;
 
     var isWorkItemMoved = false;
-
+    
     var pageType = $routeParams.type;
 
     var itemData = null;
@@ -352,5 +352,26 @@ ImgVisionApp.controller('myWorkItemViewController', function ($rootScope, $scope
         $scope.isLoading = false;
     });
 
+
+    //document view and barnch view code. 
+
+     
+    $scope.isBranchView = false;
+    $scope.isDocumentView = true;
+
+    $scope.showDocuemntView = function (){
+        
+        $scope.isBranchView = false;
+        $scope.isDocumentView = true;
+
+    }
+
+    $scope.showBranchView = function(){
+          
+          $scope.isDocumentView = false;
+          $scope.isBranchView = true;
+
+    }
+    
 
 });

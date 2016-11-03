@@ -1,1 +1,11 @@
-Reports - TBD
+<div>
+    <div class = "reports-list">
+        <h4>Select a report type to view</h4>
+        <ul>
+           <li ng-repeat ="reportCategorie in reportCategories" >
+             <a href="{{reportCategorie.url}}" target="_blank" > {{reportCategorie.reportName | translate}} </a>
+           </li>
+        </ul>           
+    </div>
+</div>
+

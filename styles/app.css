@@ -1756,3 +1756,26 @@ button[disabled].addNotesBtn{
     pointer-events: none;
     text-decoration: none;
 } 
+
+/* reprots tab styles */
+
+.reports-list h4 {
+    padding:10px;
+}
+
+.reports-list ul {
+    list-style:none; background:#fbfbfb; padding:0px;
+}
+
+.reports-list li {
+    padding:8px; cursor:default; border-bottom:1px solid #e8e8e8;
+}
+
+.reports-list a {
+    padding:8px; dispay:block; color:#666; text-decoration:none;
+}
+
+.reports-list a:hover {
+    text-decoration: none;
+    color: #199ad1;
+}

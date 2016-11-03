@@ -45,21 +45,42 @@
                 <div class="mdl-spinner mdl-spinner--single-color mdl-js-spinner is-active"></div>
             </div>
             <div class="iframeContainer left">
-                <iframe id="workItemIframe" height="700" width="100%" src="{{iframeUrl}}"></iframe>
+                <iframe name="workItemIframe" id="workItemIframe" height="700" width="100%" src="{{iframeUrl}}></iframe> 
             </div>
             <div class="create-document-lists left work-item-wrapper">
                 <div class="business-area-wrapper">
                     <div class="loader" ng-show="isSelectResultsLoading">
                         <i class="fa fa-spinner fa-spin fa-3x fa-fw"></i>
                     </div>
-                    <div ng-show="isSelectResultsAvailable" class="left">
+                    <div ng-show="isSelectResultsAvailable" class="left full-width">
                         <form name="saveWorkItemForm" novalidate>
                             <div class="propertiesTitle">{{ 'PROPERTIES' | translate}}</div>
-                            <ul class="field-lists">
+                            <ul class="field-lists" style="max-height: 500px">
                                 <li class="field {{r.ControlName | lowercase}}" search-field-box-templates ng-repeat="r in selectResults" search-field-box-templates-object="r.ValueAsString" search-field-box-templates-label="r.DisplayName" search-field-box-templates-type="r.ControlName" search-field-box-templates-selects="r.ComboValues" search-field-box-required="r.IsMandatory" search-field-box-templates-operators="r.SearchOperatorOptions" search-field-box-templates-format="r.FieldDateFormat.DefaultFormat" search-field-box-module="viewer" search-field-box-templates-permission="isReadOnly" search-field-box-templates-check="r.ValueAsString"></li>
                             </ul>
                             <button class="btn blue saveIndexFieldsBtn" a-disabled="isReadOnly || saveWorkItemForm.$invalid" ng-click="saveWorkItem()">{{'Save' | translate}}</button>
                         </form>
+                    </div>
+                    <div class="left" style="max-height: 300px">
+                       <div class="menu_tabs" >
+                           <a href="javascript:" class="menu" ng-class="{'is-active': isDocumentView }" ng-click="showDocuemntView()" >{{ 'Document View' | translate }}<span ng-class="{ 'arrow': isDocumentView }"></span></a>
+                           <a href="javascript:" class="menu" ng-class="{'is-active': isBranchView }" ng-click="showBranchView()" >{{ 'Branch View' | translate }}<span ng-class="{ 'arrow': isBranchView }"></span></a>
+                       </div>
+                       <div style="border: 1px solid #dbdbdb;  " class="left">
+                           <div ng-show="isDocumentView"  >
+                             <ul style="list-style:none; background:#fbfbfb; padding:0px">
+                               <li style=" padding:8px; cursor:default; border-bottom:1px solid #e8e8e8;">
+                                  <a href="{{iframeUrl}}" target="workItemIframe" style="padding:8px; dispay:block; color:#666; text-decoration:none; " > Click This 1st link</a>
+                               </li> 
+                               <li style=" padding:8px; cursor:default; border-bottom:1px solid #e8e8e8;"> 
+                                  <a href="{{iframeUrl}}" target="workItemIframe" style="padding:8px; dispay:block; color:#666; text-decoration:none;" > Click This 2nd link</a> 
+                              </li>  
+                             </ul>
+                           </div>
+                           <div ng-show="isBranchView" >
+                              content inside menu need to bind the work item in a group and dispay a anchor for user to select. upon selection display the details in a ifarme contents loaded on the page wiht jlkasdjfiojuklmlasdfjiojl kjlas o ias l oa lida l aio ijd oa id o lkdaif oaidj osda la oi ad oi df o ia  oi dfa o ida o di oa odi ao di do id.
+                           </div>
+                       </div>
                     </div>
                 </div>
             </div>
