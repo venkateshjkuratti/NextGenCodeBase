@@ -71,9 +71,8 @@
       </div>
       <div class="iframeContainer left">
         <iframe height="700"
-                id="workItemIframe"
-                src="{{iframeUrl}}"
-                width="100%"></iframe>
+                id="workItemIframe"                
+                width="100%"></iframe> <!--src="{{iframeUrl}}"-->
       </div>
       <div class="create-document-lists left work-item-wrapper">
         <div class="business-area-wrapper">
@@ -86,44 +85,127 @@
             <form name="saveWorkItemForm"
                   novalidate="">
               <div class="propertiesTitle">{{ 'PROPERTIES' | translate}}</div>
-              <!-- <ul class="field-lists">
-                <li class="field {{r.ControlName | lowercase}}"
-                    ng-repeat="r in selectResults"
-                    search-field-box-module="viewer"
-                    search-field-box-required="r.IsMandatory"
-                    search-field-box-templates=""
-                    search-field-box-templates-check="r.ValueAsString"
-                    search-field-box-templates-format="r.FieldDateFormat.DefaultFormat"
-                    search-field-box-templates-label="r.DisplayName"
-                    search-field-box-templates-object="r.ValueAsString"
-                    search-field-box-templates-operators="r.SearchOperatorOptions"
-                    search-field-box-templates-permission="isReadOnly"
-                    search-field-box-templates-selects="r.ComboValues"
-                    search-field-box-templates-type="r.ControlName"></li>
-              </ul> -->
-              <select id="sbOne"
+              <div style="line-height:30px;"> 
+              <div >
+                <span>{{'WorkItem ID:' | translate}}</span>
+                <span></span>
+              </div>
+              <div >
+                <span>{{'Batch ID:' | translate}}</span>
+                <span></span>
+              </div>
+              <div>
+                <span>{{'Document ID:' | translate}}</span>
+                <span></span>
+              </div>
+              <div>
+                <span>{{'Create Date:' | translate}}</span>
+                <span></span>
+              </div>
+              <div>
+                <span>{{'Title:' | translate}}</span>
+                <span></span>
+              </div>
+              <div>
+               <div style="float:left; margin-right:20px;">
+                 <div>
+                   <span>{{'Select a Layer' | translate}} </span>
+                 </div>
+                 <div>
+                  <select class="document-select" style="min-width:200px;">
+                      <option value="1">Alpha</option>
+                      <option value="2">Beta</option>
+                      <option value="3">Gamma</option>
+                      <option value="4">Delta</option>
+                      <option value="5">Epsilon</option>  
+                  </select>
+                 </div>
+                 </div>
+                 <div >
+                 <div>
+                    <span>{{'Select a Document Type' | translate}} </span>
+                 </div>
+                 <div>
+                  <select class="document-select" style="min-width:200px;">
+                      <option value="1">Alpha</option>
+                      <option value="2">Beta</option>
+                      <option value="3">Gamma</option>
+                      <option value="4">Delta</option>
+                      <option value="5">Epsilon</option>  
+                  </select>
+                  </div>
+                 </div>
+                 <div style="margin-top:20px;" >
+                  <div>
+                    <span>{{'Select Special Document Type' | translate}} </span>
+                  </div>
+                   <div>
+                      <select class="document-select" style="min-width:200px;">
+                      <option value="1">Alpha</option>
+                      <option value="2">Beta</option>
+                      <option value="3">Gamma</option>
+                      <option value="4">Delta</option>
+                      <option value="5">Epsilon</option>  
+                      </select>
+                   </div>
+                 </div>
+                </div>
+              </div>
+              <fieldset style="margin-top:20px;" >
+                <div style="float:left;" >
+                      <select id="sbOne"
                       multiple="multiple"
                       style="height:150px; width:150px;">
-                <option value="1">Alpha</option>
-                <option value="2">Beta</option>
-                <option value="3">Gamma</option>
-                <option value="4">Delta</option>
-                <option value="5">Epsilon</option>
-              </select>
-              <input type="button"
-                     value="&lt;" />
-              <input type="button"
-                     value="&gt;" />
-              <select id="sbOne"
+                      <option value="1">Alpha</option>
+                      <option value="2">Beta</option>
+                      <option value="3">Gamma</option>
+                      <option value="4">Delta</option>
+                      <option value="5">Epsilon</option>  
+                      </select>
+               </div>
+               <div  style="margin:0 30px 0 30px; float:left;">
+                 <div>
+                  <button style="margin:5px 0 5px 0 " > {{'Add' | translate}} </button>
+                 </div>
+                 <div>
+                  <button style="margin:5px 0 5px 0" > {{'Remove' | translate}} </button>
+                 </div>
+                 <div>
+                   <button style="margin:5px 0 5px 0">
+                      <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>
+                   </button>
+                 </div>
+                 <div>
+                   <button style="margin:5px 0 5px 0">
+                      <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>
+                   </button>
+                 </div>
+               </div>
+               <div>
+                   <select id="sbOne"
                       multiple="multiple"
                       style="height:150px; width:150px;">
-                <option value="1">Alpha</option>
-                <option value="2">Beta</option>
-                <option value="3">Gamma</option>
-                <option value="4">Delta</option>
-                <option value="5">Epsilon</option>
-              </select>
+                   <option value="1">Alpha</option>
+                   <option value="2">Beta</option>
+                   <option value="3">Gamma</option>
+                   <option value="4">Delta</option>
+                   <option value="5">Epsilon</option>
+                   </select>
+               </div>
+               <div style="margin:20px 0 20px 0;" >
+                  <select class="document-select" style="min-width:200px;">
+                      <option value="1">Alpha</option>
+                      <option value="2">Beta</option>
+                      <option value="3">Gamma</option>
+                      <option value="4">Delta</option>
+                      <option value="5">Epsilon</option>  
+                  </select>
+               </div>
+               <div>
+                 <textarea rows="5" cols="60"></textarea>
+               </div>
 
+             </fieldset>
               
               <button a-disabled="isReadOnly || saveWorkItemForm.$invalid"
                       class="btn blue saveIndexFieldsBtn"

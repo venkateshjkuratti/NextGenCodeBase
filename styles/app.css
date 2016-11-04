@@ -1779,3 +1779,19 @@ button[disabled].addNotesBtn{
     text-decoration: none;
     color: #199ad1;
 }
+
+
+/*Traffic Cop styles */
+
+.document-select {
+    border: 1px solid #ccc;
+    background: #fff url('../assets/images/down-arrow.png') no-repeat 95% 50%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    padding: 0 0 0 10px;
+    height: 38px;
+    color: #666;
+}
